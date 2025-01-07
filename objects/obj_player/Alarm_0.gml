@@ -1,0 +1,2 @@
+/// Attack Cooldown
+cd = false;

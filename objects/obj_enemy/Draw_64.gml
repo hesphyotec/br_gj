@@ -1,0 +1,1 @@
+draw_rectangle(64,64,(1206* hp / 100), 80, false);
