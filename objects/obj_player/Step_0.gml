@@ -37,7 +37,7 @@ if (hp == 0){
 
 // Wind up
 if (knocked == false){
-	if mouse_check_button(mb_right){
+	if (mouse_check_button(mb_right) and global.can_charge == true){
 		if (charging == false){
 			audio_play_sound(snd_charge, 1, false, .25, 0, 1.5);
 		}
@@ -158,61 +158,64 @@ if (knocked == true){
 
 
 // Combat
-
-if (keyboard_check_pressed(ord("Q")) and cd == false){
-	if (bon_spd > 0){
-		if (bon_spd == 34) {
-			spd = 111;
-			bon_spd = 0;
-			bounce = true;
-		} else {
-			spd = spd + bon_spd;
-			bon_spd = 0;
+if (global.can_abil == true){
+	if (keyboard_check_pressed(ord("Q")) and cd == false){
+		if (bon_spd > 0){
+			if (bon_spd == 34) {
+				spd = 111;
+				bon_spd = 0;
+				bounce = true;
+			} else {
+				spd = spd + bon_spd;
+				bon_spd = 0;
+			}
+		tut_q = true;
 		}
-	}
-	var _att = instance_create_layer(x, y, "Instances", obj_shield);
-	_att.toss(mv_angle, spd);
-	_att.bounce = bounce;
-	_att.deccel = clamp(deccel * .333, .05, deccel);
-	atkout = true;
-	spd = b_spd;
-}
-if (keyboard_check_pressed(ord("W")) and cd == false){
-	if (atkout == true){
-		if (object_exists(obj_shield)){
-			obj_shield.expand();
-		}
-		cd = true;
-	} else {
-		var _att = instance_create_layer(x,y,"Instances",obj_shield);
-		_att.mode = 1;
+		var _att = instance_create_layer(x, y, "Instances", obj_shield);
+		_att.toss(mv_angle, spd);
+		_att.bounce = bounce;
+		_att.deccel = clamp(deccel * .333, .05, deccel);
 		atkout = true;
-		cd = true;
+		spd = b_spd;
+	}
+	if (keyboard_check_pressed(ord("W")) and cd == false){
+		if (atkout == true){
+			if (object_exists(obj_shield)){
+				obj_shield.expand();
+			}
+			cd = true;
+		} else {
+			var _att = instance_create_layer(x,y,"Instances",obj_shield);
+			_att.mode = 1;
+			atkout = true;
+			cd = true;
+		}
+	tut_w = true;
+	}
+
+	if (keyboard_check_pressed(ord("E")) and cd == false){
+		if (atkout == true){
+			if (object_exists(obj_shield)){
+				var _tposx = x;
+				var _tposy = y;
+			
+				x = obj_shield.x;
+				y = obj_shield.y;
+			
+				obj_shield.ang = mv_angle;
+				obj_shield.x = _tposx;
+				obj_shield.y = _tposy;
+			
+				obj_camera.x = x;
+				obj_camera.y = y;
+				tut_e = true;
+			
+			}
+			cd = true;
+		} 
 	}
 }
-
-if (keyboard_check_pressed(ord("E")) and cd == false){
-	if (atkout == true){
-		if (object_exists(obj_shield)){
-			var _tposx = x;
-			var _tposy = y;
-			
-			x = obj_shield.x;
-			y = obj_shield.y;
-			
-			obj_shield.ang = mv_angle;
-			obj_shield.x = _tposx;
-			obj_shield.y = _tposy;
-			
-			obj_camera.x = x;
-			obj_camera.y = y;
-			
-		}
-		cd = true;
-	} 
-}
-
-if (spinning == true and mouse_check_button(mb_left) and cd == false and atkout == false){
+if (spinning == true and mouse_check_button(mb_left) and cd == false and atkout == false and global.can_attack == true){
 	var _att = instance_create_layer(x, y, "Instances", obj_swipe);
 	_att.image_angle = point_direction(x,y,mouse_x, mouse_y) - 90;
 	cd = true
@@ -224,5 +227,19 @@ if (instance_place(x,y,obj_shield)){
 	if (obj_shield.mode == 1 and alarm[1] <= 0){
 		immune = true;
 		alarm[1] = 6;
+	}
+}
+
+//Tutorial stuff
+
+if (global.cs_active == true){
+	if(spd >= 66){
+		obj_cutscener.code = "full_charge";	
+	}
+	if(tut_q and tut_w and tut_e){
+		obj_cutscener.code = "tut_abil";	
+	}
+	if(instance_place(x,y,obj_enemy)){
+		obj_cutscener.code = "tut_charge";	
 	}
 }

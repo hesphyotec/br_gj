@@ -1,8 +1,6 @@
-/// @description Insert description here
-// You can write your code in this editor
-
-
-
-
+global.cs_active = false;
+global.can_charge = true;
+global.can_attack = true;
+global.can_abil = true;
 
 

@@ -66,3 +66,10 @@ minibounce = function(_obj){
 	//		xflip = -xflip;
 	//	}
 	////}
+	
+	
+//Tutorial stuff
+
+tut_q = false;
+tut_w = false;
+tut_e = false;

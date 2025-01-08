@@ -20,3 +20,27 @@ bnce = function(_obj){
 		yflip = -yflip;
 	}
 }
+
+anim_tarx = 0;
+anim_tary = 0;
+anim_moving = false;
+anim_endval = -1;
+anim_val = -2;
+anim_active = false
+play_anim = function(_anim){
+	switch(_anim){
+		case("walk"):
+			anim_active = true;
+			anim_moving = true;
+			anim_tarx = x;
+			anim_tary = y + 1000;
+			anim_endval = 0;
+			break;
+		
+	}
+}
+endanim = function(){
+	obj_cutscener.get_next_line();
+	anim_active = false;
+}
+
