@@ -9,6 +9,7 @@ yflip = 1;
 bounce = false;
 deccel = .1;
 expandcombo = false;
+dmg = 5;
 toss = function(_dir, _str){
 	mode = 0;
 	ang = _dir;

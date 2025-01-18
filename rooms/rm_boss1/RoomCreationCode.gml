@@ -1,0 +1,1 @@
+obj_musiccontrol.playsong(snd_boss1);

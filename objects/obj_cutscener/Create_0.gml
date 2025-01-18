@@ -20,9 +20,6 @@ start_cs = function(_cs){
 	global.cs_active = true;
 	switch(_cs){
 		case("/INTRO"):
-			global.can_charge = false;
-			global.can_attack = false;
-			global.can_abil = false;
 			break;
 	}
 	cs_line = 0;
@@ -76,8 +73,13 @@ get_line = function(_cs){
 				case("tut_abil"):
 					global.can_abil = true;
 					break;
+				case("tut_charge"):
+					global.can_release = true;
+					break;
 			}
 			break;
+		case("levelend"):
+			room_goto(rm_testmenu);
 		default:
 			end_scene();
 			show_debug_message("Error Parsing Script");
@@ -102,5 +104,3 @@ end_scene = function(){
 	anim = false;
 	global.cs_active = false;
 }
-
-start_cs("/INTRO");

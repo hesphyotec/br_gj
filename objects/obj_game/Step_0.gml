@@ -1,6 +1,4 @@
 ///Temp startgame
-if (room = rm_testmenu){
-	if (keyboard_check(vk_enter)){
-		room_goto(rm_testing);	
-	}
+if(keyboard_check_released(vk_f4)){
+	window_set_fullscreen(!window_get_fullscreen());
 }

@@ -1,20 +1,29 @@
-if (instance_place(x,y, obj_swipe)){
-	master.bnce(obj_player);
-	damage_done = true;
-}
-
-if (instance_place(x, y, obj_player) and damage_done == false){
-	with(obj_player){
-		if (immune == false) {	
-			hp--;	
-		}
+if (instance_place(x,y,obj_swipe)){
+	obj_player.bnce(obj_enemy);
+	obj_player.inframes(30);
+	if (obj_player.mega_charge == true){
+		obj_enemy.minibounce(obj_player);
+	} else {
+		obj_enemy.bnce(obj_player);	
 	}
-	damage_done = true;
+	alarm[0] = 30;
 }
 
-if(image_index >= 3){
-	instance_destroy(self);
+if (instance_place(x, y, obj_player) and alarm[0] <= 0){
+	with(obj_player){
+		if (immune == false) {
+			alarm[2] = 20;
+			hp--;
+		} else {
+			if (charge_shield == true){
+				charge_shield = false;	
+			}
+		}
+		
+	}
+	alarm[0] = 30;
 }
+
 x = master.x;
 y = master.y;
 

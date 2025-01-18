@@ -1,29 +1,27 @@
 /TEST
 playanim|obj_enemy|walk
-playdiag|spr_lightball|spr_|fnt_main|This is just a test!
+playdiag|spr_lightball|spr_dbox|fnt_diag1|This is just a test!
 end
 /TEST2
 playanim|obj_enemy|walk
-playdiag|spr_enemy|spr_|fnt_main|This shouldn't be happening!
+playdiag|spr_enemy|spr_dbox|fnt_diag1|This shouldn't be happening!
 end
 /INTRO
-playdiag|spr_axemage|spr_|fnt_main|Dark times are approaching.
-playdiag|spr_axemage|spr_|fnt_main|The MASTER WITCH Rivian has risen from beyond the grave.
-playdiag|spr_axemage|spr_|fnt_main|She plans to sacrifice all life in order to obtain a horrifying power.
-playdiag|spr_axemage|spr_|fnt_main|But we mustn't allow that, which is why I have summoned you.
-playdiag|spr_axemage|spr_|fnt_main|You were once her student. You may have a chance against her.
-playdiag|spr_axemage|spr_|fnt_main|Allow me to gauge your aptitude.
-playdiag|spr_axemage|spr_|fnt_main|First, show me that you can charge your SPINITUAL ENERGY by pressing the Right Mouse Button.
-waitfor|full_charge
-playdiag|spr_axemage|spr_|fnt_main|Excellent, I can feel your SPINIT from here.
-playdiag|spr_axemage|spr_|fnt_main|Now, release your SPINITUAL ENERGY at me, do not fear, I am quite resilient.
-waitfor|tut_charge
-playdiag|spr_axemage|spr_|fnt_main|Such power...
-playdiag|spr_axemage|spr_|fnt_main|Strike me with your SPINIT SHIELD, charge at me and press the Left Mouse Button.
-waitfor|tut_attack
-playdiag|spr_axemage|spr_|fnt_main|Such strength...
-playdiag|spr_axemage|spr_|fnt_main|Let me see your abilities, use the keystones of Q W E to manifest your SPINIT.
-waitfor|tut_abil
-playdiag|spr_axemage|spr_|fnt_main|Such magnificance... yes you will do quite nicely...
-playdiag|spr_axemage|spr_|fnt_main|Now, let us do combat! And if I am impressed, mayhaps we shall fight side by side against the MASTER WITCH.
+playdiag|spr_axemage|spr_dbox|fnt_diag1|Dark times are approaching.
+playdiag|spr_axemage|spr_dbox|fnt_diag1|The MASTER WITCH Rivian has risen from beyond the grave.
+playdiag|spr_axemage|spr_dbox|fnt_diag1|She plans to sacrifice all life in order to obtain a horrifying power.
+playdiag|spr_axemage|spr_dbox|fnt_diag1|But we mustn't allow that, which is why I have summoned you.
+playdiag|spr_axemage|spr_dbox|fnt_diag1|You were once her student. You may have a chance against her.
+playdiag|spr_axemage|spr_dbox|fnt_diag1|Allow me to gauge your aptitude.
+playdiag|spr_axemage|spr_dbox|fnt_diag1|Prepare yourself, then approach me when you are ready.
+waitfor|intro_app
+playdiag|spr_axemage|spr_dbox|fnt_diag1|Ready? Let us begin.
+end
+/ENDBOSS1
+playdiag|spr_axemage|spr_dbox|fnt_diag1|*Cough* Yes... yes...
+playdiag|spr_axemage|spr_dbox|fnt_diag1|You are quite strong... now... there is one more matter at hand...
+playdiag|spr_axemage|spr_dbox|fnt_diag1|Your final test... head to the bowels of the cathedral... and face the astral beast...
+playdiag|spr_axemage|spr_dbox|fnt_diag1|When you return, we shall prepare to face our foe...
+playdiag|spr_axemage|spr_dbox|fnt_diag1|Blessed be your journey, and may we reunite.
+levelend
 end
