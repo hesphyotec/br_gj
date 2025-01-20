@@ -24,8 +24,8 @@ if (weapon == 0){
 }
 
 if (hp == 0){
-	obj_musiccontrol.stopsong();
-	room_goto(rm_testmenu)	
+	audio_stop_all();
+	room_goto(rm_testmenu);
 }
 
 // Normal move code
@@ -47,7 +47,7 @@ if (hp == 0){
 
 
 // Wind up
-if (knocked == false){
+if (knocked == false and grabbed == false){
 	if (mouse_check_button(mb_right) and global.can_charge == true){
 		if (charging == false){
 			audio_play_sound(snd_charge, 1, false, global.effectvol, 0, .75);
@@ -65,13 +65,18 @@ if (knocked == false){
 			x += lengthdir_x(d_spd * xflip, dft_angle);
 			y += lengthdir_y(d_spd * yflip, dft_angle);
 			scr_collision();
-			if instance_place(x,y,obj_barr){
+			if (room == rm_boss2){
+				scr_circ_collision();
 				if (bounce){
-					bnce(instance_nearest(x,y,obj_barr));
+					circ_bounce();	
 				} else {
-					minibounce(instance_nearest(x,y,obj_barr));
+					circ_minibounce();
 				}
-				obj_camera.shake_scr(10,20 * (spd/33));
+			}
+			if (bounce){
+				bnce(obj_barr);	
+			} else {
+				minibounce(obj_barr);
 			}
 		}
 		bounce = false;
@@ -138,6 +143,14 @@ if (global.can_release == true){
 		x += lengthdir_x(hspd, mv_angle);
 		y += lengthdir_y(vspd, mv_angle);
 		scr_collision();
+		if (room == rm_boss2){
+			scr_circ_collision();
+			if (bounce){
+				circ_bounce();	
+			} else {
+				circ_minibounce();
+			}
+		}
 		if (bounce){
 			bnce(obj_barr);	
 		} else {
@@ -154,6 +167,14 @@ if spinning == true and charging == false{
 	x += lengthdir_x(hspd, mv_angle);
 	y += lengthdir_y(vspd, mv_angle);
 	scr_collision();
+	if (room == rm_boss2){
+		scr_circ_collision();
+		if (bounce){
+			circ_bounce();	
+		} else {
+			circ_minibounce();
+		}
+	}
 	if (bounce){
 		bnce(obj_barr);	
 	} else {
@@ -168,10 +189,20 @@ if spinning == true and charging == false{
 }
 
 if (knocked == true){
+	grabbed = false;
 	spd = lerp(spd, 0, .3);
+	deccel = .1;
 	x += lengthdir_x(hspd, mv_angle);
 	y += lengthdir_y(vspd, mv_angle);
 	scr_collision();
+	if (room == rm_boss2){
+		scr_circ_collision();
+		if (bounce){
+			circ_bounce();	
+		} else {
+			circ_minibounce();
+		}
+	}
 	if (bounce){
 		bnce(obj_barr);	
 	} else {
@@ -182,6 +213,27 @@ if (knocked == true){
 	}
 }
 
+if (grabbed == true){
+	x += lengthdir_x(hspd, mv_angle);
+	y += lengthdir_y(vspd, mv_angle);
+	scr_collision();
+	if (room == rm_boss2){
+		scr_circ_collision();
+		if (bounce){
+			circ_bounce();	
+		} else {
+			circ_minibounce();
+		}
+	}
+	if (bounce){
+		bnce(obj_barr);	
+	} else {
+		minibounce(obj_barr);
+	}
+	if (floor(spd) <= 0){
+		knocked = false;
+	}
+}
 
 // Combat
 if (global.can_abil == true){

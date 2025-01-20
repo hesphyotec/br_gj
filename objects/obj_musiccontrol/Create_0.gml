@@ -12,3 +12,7 @@ stopsong = function(){
 fadesong = function(_fadespd){
 	audio_sound_gain(song, 0, _fadespd);
 }
+
+if(room == rm_testmenu){
+	playsong(snd_mainmenu);	
+}

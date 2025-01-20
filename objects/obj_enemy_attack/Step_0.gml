@@ -9,20 +9,7 @@ if (instance_place(x,y,obj_swipe)){
 	alarm[0] = 30;
 }
 
-if (instance_place(x, y, obj_player) and alarm[0] <= 0){
-	with(obj_player){
-		if (immune == false) {
-			alarm[2] = 20;
-			hp--;
-		} else {
-			if (charge_shield == true){
-				charge_shield = false;	
-			}
-		}
-		
-	}
-	alarm[0] = 30;
-}
+event_inherited();
 
 x = master.x;
 y = master.y;

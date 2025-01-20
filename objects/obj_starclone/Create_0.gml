@@ -1,0 +1,48 @@
+hp = 1000;
+aggression = 0;
+spd = 0;
+hspd = 0;
+vspd = 0;
+charging = false;
+spinning = false;
+target = obj_player;
+att_angle = 0;
+xflip = 1;
+yflip = 1;
+phase = 0;
+max_dash = 3;
+dashes = 0;
+state = "none";
+mode = -1;
+substate = "none";
+alarm[3] = 600;
+
+bnce = function(_obj){
+	att_angle = obj_player.mv_angle;
+}
+
+minibounce = function(_obj){
+	att_angle = obj_player.mv_angle;
+	spd = spd/2;
+	state = "stun";
+}
+
+
+circ_off = 32;
+circ_ang_off = 0;
+hp_rot = 0;
+
+
+aura = instance_create_layer(x, y, "Lights", obj_lightsource);
+aura.color = c_blue;
+aura.color_thick = .7;
+aura.whiteness = 1;
+aura.x_rad = 3;
+aura.y_rad = 3;
+aura2 = instance_create_layer(x, y, "Lights", obj_lightsource);
+aura2.color = c_blue;
+aura2.color_thick = .5;
+aura2.whiteness = 1;
+aura2.x_rad = 3;
+aura2.y_rad = 3;
+

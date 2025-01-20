@@ -46,7 +46,7 @@ switch(keyboard_key){
 					break;
 				case(2):
 					effect_slide = clamp(effect_slide + .05, 0, 1);
-					global.effectvol = effec_slide;
+					global.effectvol = effect_slide;
 					break;
 			}
 			execute(selection, menu);
@@ -90,19 +90,19 @@ switch(menu){
 		if(mouse_x > (room_width/2) - 256 and mouse_x < (room_width/2) + 640){
 			if (mouse_y > room_height/2 and mouse_y < room_height/2 + 96){
 				selection = 0;
-				if (mouse_check_button_pressed(mb_left)){
+				if (mouse_check_button(mb_left)){
 					master_slide = clamp((device_mouse_x_to_gui(0) - (display_get_gui_width()/2) - 256) / (384), 0 ,1);
 					execute(selection, menu);
 				}
 			} else if (mouse_y > room_height/2 + 128 and mouse_y < room_height/2 + 224){
 				selection = 1;
-				if (mouse_check_button_pressed(mb_left)){
+				if (mouse_check_button(mb_left)){
 					music_slide = clamp((device_mouse_x_to_gui(0) - (display_get_gui_width()/2) - 256) / (384), 0, 1);
 					execute(selection, menu);
 				}
 			} else if (mouse_y > room_height/2 + 256 and mouse_y < room_height/2 + 352){
 				selection = 2;
-				if (mouse_check_button_pressed(mb_left)){
+				if (mouse_check_button(mb_left)){
 					effect_slide = clamp((device_mouse_x_to_gui(0) - (display_get_gui_width()/2) - 256) / (384), 0, 1);
 					execute(selection, menu);
 				}
