@@ -23,6 +23,7 @@ knocked = false;
 charge_shield = false;
 grabbed = false;
 image_speed = 1;
+realspd = 0;
 
 get_spin_dir = function(){
 	return point_direction(x,y, mouse_x, mouse_y);

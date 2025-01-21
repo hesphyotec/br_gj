@@ -14,8 +14,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "Enemies",
-    "path": "folders/Objects/Enemies.yy",
+    "name": "Star Mage",
+    "path": "folders/Objects/Enemies/Star Mage.yy",
   },
   "parentObjectId": {
     "name": "obj_enemy",

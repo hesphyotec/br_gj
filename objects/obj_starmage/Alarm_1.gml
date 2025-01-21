@@ -14,6 +14,13 @@ switch(mode){
 		aggression = 0;
 		dashes = 0;
 		break;
+	case(10):
+		instance_destroy(obj_laser);
+		state = "none";	
+		substate = "none";
+		mode = -1;
+		aggression = 0;
+		break;
 	default:
 		state = "none";	
 		substate = "none";

@@ -62,6 +62,7 @@ if (knocked == false and grabbed == false){
 		}
 		if (drift == true and knocked == false) {
 			d_spd = lerp(d_spd, 0, .1);
+			realspd = d_spd;
 			x += lengthdir_x(d_spd * xflip, dft_angle);
 			y += lengthdir_y(d_spd * yflip, dft_angle);
 			scr_collision();
@@ -70,13 +71,13 @@ if (knocked == false and grabbed == false){
 				if (bounce){
 					circ_bounce();	
 				} else {
-					circ_minibounce();
+					//circ_minibounce();
 				}
 			}
 			if (bounce){
 				bnce(obj_barr);	
 			} else {
-				minibounce(obj_barr);
+				//minibounce(obj_barr);
 			}
 		}
 		bounce = false;
@@ -142,19 +143,20 @@ if (global.can_release == true){
 		vspd = spd * yflip;
 		x += lengthdir_x(hspd, mv_angle);
 		y += lengthdir_y(vspd, mv_angle);
+		realspd = spd;
 		scr_collision();
 		if (room == rm_boss2){
 			scr_circ_collision();
 			if (bounce){
 				circ_bounce();	
 			} else {
-				circ_minibounce();
+				//circ_minibounce();
 			}
 		}
 		if (bounce){
 			bnce(obj_barr);	
 		} else {
-			minibounce(obj_barr);
+			//minibounce(obj_barr);
 		}
 		
 		obj_camera.shake_scr(10,25);
@@ -166,19 +168,20 @@ if spinning == true and charging == false{
 	spd = clamp(lerp(spd, b_spd, deccel), b_spd, spd);
 	x += lengthdir_x(hspd, mv_angle);
 	y += lengthdir_y(vspd, mv_angle);
+	realspd = spd;
 	scr_collision();
 	if (room == rm_boss2){
 		scr_circ_collision();
 		if (bounce){
 			circ_bounce();	
 		} else {
-			circ_minibounce();
+			//circ_minibounce();
 		}
 	}
 	if (bounce){
 		bnce(obj_barr);	
 	} else {
-		minibounce(obj_barr);
+		//minibounce(obj_barr);
 	}
 
 	image_speed = clamp((.1 * spd), .25, 5);
@@ -194,13 +197,14 @@ if (knocked == true){
 	deccel = .1;
 	x += lengthdir_x(hspd, mv_angle);
 	y += lengthdir_y(vspd, mv_angle);
+	realspd = spd;
 	scr_collision();
 	if (room == rm_boss2){
 		scr_circ_collision();
 		if (bounce){
 			circ_bounce();	
 		} else {
-			circ_minibounce();
+			//circ_minibounce();
 		}
 	}
 	if (bounce){
@@ -209,26 +213,27 @@ if (knocked == true){
 		minibounce(obj_barr);
 	}
 	if (floor(spd) <= 0){
-		knocked = false;
+		//knocked = false;
 	}
 }
 
 if (grabbed == true){
 	x += lengthdir_x(hspd, mv_angle);
 	y += lengthdir_y(vspd, mv_angle);
+	realspd = spd;
 	scr_collision();
 	if (room == rm_boss2){
 		scr_circ_collision();
 		if (bounce){
 			circ_bounce();	
 		} else {
-			circ_minibounce();
+			//circ_minibounce();
 		}
 	}
 	if (bounce){
 		bnce(obj_barr);	
 	} else {
-		minibounce(obj_barr);
+		//minibounce(obj_barr);
 	}
 	if (floor(spd) <= 0){
 		knocked = false;

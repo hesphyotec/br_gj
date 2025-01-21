@@ -49,9 +49,9 @@ with(obj_surface_effect){
 circ_ang_off = (circ_ang_off + (spd / 2)) mod 360;
 hp_rot = (hp_rot - .5) mod 360
 
-if (spinning) {
-	for(var i = 1; i < 4; i++){
-		draw_sprite_ext(spr_trail, image_index,  x -(lengthdir_x(hspd, mv_angle) * i), y -(lengthdir_y(vspd, mv_angle) * i), 1, 1, 0, _in_col, 1 / (.33 * i));
+if (realspd >0) {
+	for(var i = 1; i < 6; i++){
+		draw_sprite_ext(spr_trail, image_index,  x -(lengthdir_x(realspd * xflip, mv_angle) * i), y -(lengthdir_y(realspd * yflip, mv_angle) * i), 1, 1, 0, _in_col, 1 / i);
 	}
 }
 

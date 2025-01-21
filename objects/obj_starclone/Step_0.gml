@@ -18,12 +18,16 @@ if (state == "charging" and alarm[0] <= 0){ // sets charging alarm
 if (alarm[0] > 0) { // plays spinning animation
 	x += lengthdir_x(2, point_direction(x,y,obj_player.x, obj_player.y));
 	y += lengthdir_y(2, point_direction(x,y,obj_player.x, obj_player.y));
+	scr_circ_collision();
+	circ_stop();
 	spd++;
 }
 // Movement
 if (state == "spin") {
 	x += lengthdir_x(spd * xflip, att_angle);
 	y += lengthdir_y(spd * yflip, att_angle);
+	scr_circ_collision();
+	circ_stop();
 	if (floor(spd) == 0 and dashes < max_dash and alarm[0] <= 0){
 		xflip = 1;
 		yflip = 1;
@@ -33,15 +37,18 @@ if (state == "spin") {
 		dashes = 0;
 	}
 }
+if (state == "swirl") {
+}
 
 if instance_place(x,y,obj_barr){
 	spd = 0;
 }
-scr_collision();
 
 if (state == "stun" and alarm[2] <= 0){
 	x += lengthdir_x(spd * xflip, att_angle);
 	y += lengthdir_y(spd * yflip, att_angle);
+	scr_circ_collision();
+	circ_stop();
 	spd = lerp(spd, 0, .2);
 	if (floor(spd) == 0){
 		alarm[2] = 180;

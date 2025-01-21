@@ -32,6 +32,24 @@ circ_off = 32;
 circ_ang_off = 0;
 hp_rot = 0;
 
+circ_stop = function(){
+	var distx = x - 1110;
+	var disty = y - 1110;
+
+	var max_distance = 512;
+	var current_angle = point_direction(0,0,distx,disty);
+
+	var max_distx = lengthdir_x(max_distance,current_angle);
+	var max_disty = lengthdir_y(max_distance,current_angle);
+
+	if abs(distx) > abs(max_distx) {
+		spd = 0;
+	}
+	if abs(disty) > abs(max_disty) {
+		spd = 0;
+	}
+}
+
 
 aura = instance_create_layer(x, y, "Lights", obj_lightsource);
 aura.color = c_blue;

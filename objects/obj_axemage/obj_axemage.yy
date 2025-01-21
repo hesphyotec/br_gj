@@ -16,8 +16,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "Enemies",
-    "path": "folders/Objects/Enemies.yy",
+    "name": "Axe Mage",
+    "path": "folders/Objects/Enemies/Axe Mage.yy",
   },
   "parentObjectId": {
     "name": "obj_enemy",

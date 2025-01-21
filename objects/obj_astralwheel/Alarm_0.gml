@@ -1,4 +1,2 @@
-obj_starmage.mode = 6;
+obj_starmage.mode = sel;
 instance_destroy(self);
-
-

@@ -7,11 +7,11 @@ if (alarm[0] <= 0) {
 
 if (instance_place(x,y, obj_enemy) and damage_done == false){
 	master.inframes(10);
-	master.bnce(obj_enemy);
 	with(obj_enemy){
 		alarm[4] = 30;
 		hp -= other.dmg;
-		if (state != "stun"){
+		if (state == "spin"){
+			other.master.bnce(self);
 			bnce(other.master);
 		}
 	}

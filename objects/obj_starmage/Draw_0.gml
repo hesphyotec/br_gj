@@ -14,5 +14,5 @@ draw_circle_color((x), (y), 60 + _crad + _jig, c_black, c_black, true);
 circ_ang_off = (circ_ang_off + (spd / 2)) mod 360;
 
 draw_set_color(c_white);
-draw_text(x,y,state);
+//draw_text(x,y,state);
 draw_self();

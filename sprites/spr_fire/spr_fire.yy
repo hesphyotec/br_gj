@@ -25,8 +25,8 @@
   "nineSlice": null,
   "origin": 4,
   "parent": {
-    "name": "br_gj",
-    "path": "br_gj.yyp",
+    "name": "Temp",
+    "path": "folders/Sprites/Temp.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {

@@ -79,7 +79,7 @@ get_line = function(_cs){
 			}
 			break;
 		case("levelend"):
-			room_goto(rm_testmenu);
+			room_goto_next();
 		default:
 			end_scene();
 			show_debug_message("Error Parsing Script");

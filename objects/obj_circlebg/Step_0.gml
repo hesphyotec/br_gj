@@ -15,7 +15,7 @@ if (tilt == true){
 	
 	xmat = [-512, 512, 512, -512];
 	ymat = [-512, -512, 512, 512];
-	zmat = [100, 100, 100, 100];
+	zmat = [0, 0, 0, 0];
 
 	for(var i = 0; i < array_length(xmat); i++){
 		tmat = (xmat[i] * rxmat[0][0]) + (ymat[i] * rxmat[0][1]) + (zmat[i] * rxmat[0][2]);
@@ -32,31 +32,17 @@ if (tilt == true){
 		xmat[i] = tmat;
 	}
 	
-	minx = x;
-	miny = y;
-	maxx = x;
-	maxy = y;
-	
 	for(var i = 0; i < array_length(xmat); i++){
 		minx = min(minx, xmat[i]);
 		miny = min(miny, ymat[i]);
 		maxx = max(maxx, xmat[i]);
 		maxy = max(maxy, ymat[i]);
 	}
-	var rx = (maxx - minx) / 2;
-	var ry = (maxy - miny) / 2;
 	
-	// Player's position
-	var player_x = 400;
-	var player_y = 250;
-
-	// Check if the player is inside the ellipse
-	var distance = ((obj_player.x - x) * (obj_player.x - x)) / (rx * rx) + ((obj_player.y - y) * (obj_player.y - y)) / (ry * ry);
-	if (distance > 1) {
-		// Collision detected
-		show_message("Collision Detected!");
-		
+	if(collision_ellipse(xmat[0],ymat[0], xmat[2], ymat[2], obj_player, true, false)){
+		show_debug_message("In Ellipse");	
 	}
+	
 	with (obj_player){
 		x += lengthdir_x(other.gdis/256, other.gdir);
 		y += lengthdir_y(other.gdis/256, other.gdir);
