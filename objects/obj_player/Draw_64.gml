@@ -34,9 +34,5 @@
 //circ_ang_off = (circ_ang_off + (spd / 2)) mod 360;
 //hp_rot = (hp_rot - .5) mod 360
 if (alarm[2] > 0){
-	draw_set_color(c_red);
-	draw_set_alpha(.2)
-	draw_rectangle(0,0,display_get_gui_width(), display_get_gui_height(), false);
-	draw_set_alpha(1);
-	draw_set_color(c_white);
+	draw_sprite_stretched_ext(spr_dmg_screen, 0, 0, 0, display_get_gui_width(), display_get_gui_height(), c_white, 1 * (alarm[2] / 15));
 }

@@ -3,7 +3,10 @@ selection = 0;
 maxop = 3;
 menu = "Main";
 cd = false;
-
+enabled = true;
+if room != rm_testmenu {
+	enabled = false;	
+}
 master_slide = global.mastervol;
 music_slide = global.musicvol;
 effect_slide = global.effectvol;
@@ -13,8 +16,9 @@ execute = function(_sel, _men){
 		case("Main"):
 			switch(_sel){
 				case(0):
-					obj_musiccontrol.fadesong(100);
-					alarm[1] = 30;
+					menu = "Level";
+					//obj_musiccontrol.fadesong(100);
+					//alarm[1] = 30;
 					break;
 				case(1):
 					maxop = 4;
@@ -29,19 +33,54 @@ execute = function(_sel, _men){
 			switch(_sel){
 				case(0):
 					global.mastervol = master_slide;
+					global.user_data.update_value("mastervol", global.mastervol);
 					audio_set_master_gain(0, global.mastervol);
 					break;
 				case(1):
 					global.musicvol = music_slide;
+					global.user_data.update_value("musicvol", global.musicvol);
 					audio_sound_gain(obj_musiccontrol.song, global.musicvol, 0)
 					break;
 				case(2):
 					global.effectvol = effect_slide;
+					global.user_data.update_value("effectvol", global.effectvol);
 					break;
 				case(3):
 					selection = 1;
 					maxop = 3;
+					if (room == rm_testmenu){
+						menu = "Main";
+					} else {
+						menu = "Pause";	
+					}
+			}
+			break;
+		case("Pause"):
+			switch(_sel){
+				case(0):
+					obj_game.resume();
+					break;
+				case(1):
+					maxop = 4;
+					menu = "Options";
+					break;
+				case(2):
+					room_goto(rm_testmenu);
 					menu = "Main";
+					break;
+			}
+			break;
+		case("Level"):
+			switch(_sel){
+				case(0):
+					room_goto(rm_boss1);
+					break;
+				case(1):
+					room_goto(rm_boss2);
+					break;
+				case(2):
+					room_goto(rm_boss3);
+					break;
 			}
 	}
 }

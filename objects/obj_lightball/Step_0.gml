@@ -13,17 +13,17 @@ if (moving == true){
 	}
 } else {
 	spd = lerp(spd, 0, .5);
-	if (alarm[0] <= 0){
-		alarm[0] = 30;
+	if (alarm[1] <= 0){
+		alarm[1] = 30;
 	}
-	if (collision_circle(x,y,64,obj_player,true,true) and alarm[1] <= 0){
+	if (collision_circle(x,y,64,obj_player,true,true) and alarm[0] <= 0){
 		with(obj_player){
 			if (immune == false){
 				alarm[2] = 20;
 				hp--;
 			}
 		}
-		alarm[1] = 15;
+		alarm[0] = 15;
 	}
 }
 

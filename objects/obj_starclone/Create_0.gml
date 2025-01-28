@@ -53,14 +53,12 @@ circ_stop = function(){
 
 aura = instance_create_layer(x, y, "Lights", obj_lightsource);
 aura.color = c_blue;
-aura.color_thick = .7;
+aura.color_thick = .5;
 aura.whiteness = 1;
 aura.x_rad = 3;
 aura.y_rad = 3;
-aura2 = instance_create_layer(x, y, "Lights", obj_lightsource);
-aura2.color = c_blue;
-aura2.color_thick = .5;
-aura2.whiteness = 1;
-aura2.x_rad = 3;
-aura2.y_rad = 3;
 
+destroy_self = function(){
+	instance_destroy(aura);	
+	instance_destroy(self);
+}

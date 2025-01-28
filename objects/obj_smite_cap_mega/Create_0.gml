@@ -1,0 +1,12 @@
+circ_off = 64;
+circ_ang_off = 0;
+hp_rot = 0;
+state = "charging";
+alarm[2] = 60;
+
+aura = instance_create_layer(x, y, "Lights", obj_lightsource);
+aura.color = c_red;
+aura.color_thick = .7;
+aura.whiteness = 1;
+aura.x_rad = 2;
+aura.y_rad = 2;

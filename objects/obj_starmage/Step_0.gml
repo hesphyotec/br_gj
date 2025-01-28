@@ -26,6 +26,10 @@ if(global.cs_active == false){
 	}
 	if hp <= 0 {
 		obj_musiccontrol.fadesong(100);
+		if(global.level_unl == 1){
+			global.level_unl++;
+			global.user_data.update_value("level", global.level_unl);
+		}
 		obj_cutscener.start_cs("/ENDBOSS1");
 	}
 
@@ -162,6 +166,7 @@ if(global.cs_active == false){
 							circ_stop();
 							if (instance_place(x,y, obj_player)){
 								obj_player.grabthrow(att_angle);
+								show_debug_message("Thrown!");
 								substate = "followup";
 								alarm[0] = 60;
 							}
@@ -214,6 +219,11 @@ if(global.cs_active == false){
 								aggression = 0;
 								dashes = 0;	
 							}
+							x += lengthdir_x(2, point_direction(x,y,obj_player.x, obj_player.y));
+							y += lengthdir_y(2, point_direction(x,y,obj_player.x, obj_player.y));
+							scr_circ_collision();
+							circ_stop();
+							spd++;
 							break;
 						case("leap"):
 							x += lengthdir_x(spd * xflip, att_angle);
@@ -366,10 +376,10 @@ if(global.cs_active == false){
 							x = 1110 + lengthdir_x(p_rad, p_ang)
 							y = 1110 + lengthdir_y(p_rad, p_ang)
 							clone = instance_create_layer(x,y, "Instances", obj_starclone);
-							var _att = instance_create_layer(x,y,"Instances",obj_enemy_attack);
+							var _att = instance_create_layer(x,y,"Instances",obj_smage_attack);
 							_att.master = self;
 							clone.state = "swirl";
-							_att = instance_create_layer(x,y,"Instances",obj_enemy_attack);
+							_att = instance_create_layer(x,y,"Instances",obj_smage_attack);
 							_att.master = clone;
 							alarm[1] = 600;
 							substate = "swirl";
@@ -432,8 +442,8 @@ if(global.cs_active == false){
 		}
 		
 	}	
-	if(instance_exists(obj_enemy_attack) and (state != "spin" and substate != "spin" and substate != "followup" and substate != "swirl")){
-		instance_destroy(obj_enemy_attack);
+	if(instance_exists(obj_smage_attack) and (state != "spin" and substate != "spin" and substate != "followup" and substate != "swirl")){
+		instance_destroy(obj_smage_attack);
 	}
 
 } else if(anim_active == true){

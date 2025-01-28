@@ -13,19 +13,26 @@ aura.y = y;
 var _aurarad = 1 + spd/33 + random_range(-.05, .05);
 aura.x_rad = _aurarad;
 aura.y_rad = _aurarad;
-if (weapon == 0){
+if (array_contains(global.active_sigils,0)){
 	if (atkout == false){
 		immune = charge_shield;
-	} else {
-		if (alarm[1] <= 0){
-		alarm[1] = 6;
-		}
+	} if (alarm[1] > 0) {
+		immune = true;	
 	}
 }
 
 if (hp == 0){
 	audio_stop_all();
-	room_goto(rm_testmenu);
+	global.player_dead = true;
+	instance_create_layer(x,y,"Instances", obj_dead_player);
+	obj_game.alarm[0] = 120;
+	instance_destroy(obj_enemy);
+	instance_destroy(obj_swipe);
+	instance_destroy(obj_damage);
+	instance_destroy(obj_lightsource);
+	instance_deactivate_object(obj_surface_light);
+	obj_camera.follow = obj_dead_player;
+	instance_destroy(self);
 }
 
 // Normal move code
@@ -50,8 +57,11 @@ if (hp == 0){
 if (knocked == false and grabbed == false){
 	if (mouse_check_button(mb_right) and global.can_charge == true){
 		if (charging == false){
+			mousetut = false;
 			audio_play_sound(snd_charge, 1, false, global.effectvol, 0, .75);
-			charge_shield = true;
+			if (array_contains(global.active_sigils, 0)){
+				charge_shield = true;
+			}
 		}
 		charging = true;
 		if (spinning == true){
@@ -73,6 +83,8 @@ if (knocked == false and grabbed == false){
 				} else {
 					//circ_minibounce();
 				}
+			} else if (room == rm_boss3 and obj_squarebg.tilt == true){
+				scr_rec_collision();	
 			}
 			if (bounce){
 				bnce(obj_barr);	
@@ -98,74 +110,80 @@ if (knocked == false and grabbed == false){
 			st_ang = get_spin_dir();
 		}
 	}
-}
 
-if (bon_spd >= 17){
-	mega_charge = true;	
-	obj_camera.shake_scr(10,2);
-}
-if spinning == false and mouse_check_button(mb_left){
-	moving = true;
-	mv_tarx = mouse_x;
-	mv_tary = mouse_y;
-}
 
-// Release charge
-if (global.can_release == true){
-	if (mouse_check_button_released(mb_right) and charging == true){
-		// Gets mouse position and moves towards mouse
-		audio_stop_sound(snd_charge);
-		charging = false;
-		xflip = 1;
-		yflip = 1;
-		spinning = true;
-		charge_shield = false;
-		d_spd = b_spd;
-		if (bon_spd > 0){
-			if (bon_spd == 17) {
-				spd = 66;
-				bon_spd = 0;
-				bounce = true;
-				deccel = .011;
-				audio_play_sound(asset_get_index("snd_launch_long"+string(irandom_range(1,2))), 5, false, global.effectvol);
+	if (bon_spd >= 17){
+		mega_charge = true;	
+		spintut = false;
+		obj_camera.shake_scr(10,5);
+	} else if (bon_spd > 0){
+		obj_camera.shake_scr(10,5 * (bon_spd/17));	
+	}
+	if spinning == false and mouse_check_button(mb_left){
+		moving = true;
+		mv_tarx = mouse_x;
+		mv_tary = mouse_y;
+	}
+
+	// Release charge
+	if (global.can_release == true){
+		if (mouse_check_button_released(mb_right) and charging == true){
+			// Gets mouse position and moves towards mouse
+			audio_stop_sound(snd_charge);
+			charging = false;
+			xflip = 1;
+			yflip = 1;
+			spinning = true;
+			charge_shield = false;
+			d_spd = b_spd;
+			if (bon_spd > 0){
+				if (bon_spd == 17) {
+					spd = 66;
+					bon_spd = 0;
+					bounce = true;
+					deccel = .011;
+					audio_play_sound(asset_get_index("snd_launch_long"+string(irandom_range(1,2))), 5, false, global.effectvol);
+				} else {
+					spd = spd + bon_spd;
+					bon_spd = 0;
+					deccel = .06;
+					audio_play_sound(asset_get_index("snd_launch"+string(irandom_range(1,3))), 5, false, global.effectvol);
+				}
 			} else {
-				spd = spd + bon_spd;
-				bon_spd = 0;
-				deccel = .06;
-				audio_play_sound(asset_get_index("snd_launch"+string(irandom_range(1,3))), 5, false, global.effectvol);
+				audio_play_sound(asset_get_index("snd_launch"+string(irandom_range(1,3))), 5, false, global.effectvol);	
 			}
-		} else {
-			audio_play_sound(asset_get_index("snd_launch"+string(irandom_range(1,3))), 5, false, global.effectvol);	
-		}
-		mega_charge = false;
-		mv_angle = get_spin_dir();
-		hspd = spd * xflip;
-		vspd = spd * yflip;
-		x += lengthdir_x(hspd, mv_angle);
-		y += lengthdir_y(vspd, mv_angle);
-		realspd = spd;
-		scr_collision();
-		if (room == rm_boss2){
-			scr_circ_collision();
+			mega_charge = false;
+			mv_angle = get_spin_dir();
+			hspd = spd * xflip;
+			vspd = spd * yflip;
+			x += lengthdir_x(hspd, mv_angle);
+			y += lengthdir_y(vspd, mv_angle);
+			realspd = spd;
+			scr_collision();
+			if (room == rm_boss2){
+				scr_circ_collision();
+				if (bounce){
+					circ_bounce();	
+				} else {
+					//circ_minibounce();
+				}
+			} else if (room == rm_boss3 and obj_squarebg.tilt == true){
+				scr_rec_collision();	
+			}
 			if (bounce){
-				circ_bounce();	
+				bnce(obj_barr);	
 			} else {
-				//circ_minibounce();
+				//minibounce(obj_barr);
 			}
-		}
-		if (bounce){
-			bnce(obj_barr);	
-		} else {
-			//minibounce(obj_barr);
-		}
 		
-		obj_camera.shake_scr(10,25);
-		image_speed = clamp((.1 * spd), .25, 5);
+			//obj_camera.shake_scr(30,25);
+			image_speed = clamp((.1 * spd), .25, 5);
+		}
 	}
 }
 // Spin movement
 if spinning == true and charging == false{
-	spd = clamp(lerp(spd, b_spd, deccel), b_spd, spd);
+	spd = clamp(lerp(spd, 0, deccel), 0, spd);
 	x += lengthdir_x(hspd, mv_angle);
 	y += lengthdir_y(vspd, mv_angle);
 	realspd = spd;
@@ -177,6 +195,8 @@ if spinning == true and charging == false{
 		} else {
 			//circ_minibounce();
 		}
+	} else if (room == rm_boss3 and obj_squarebg.tilt == true){
+				scr_rec_collision();	
 	}
 	if (bounce){
 		bnce(obj_barr);	
@@ -185,10 +205,9 @@ if spinning == true and charging == false{
 	}
 
 	image_speed = clamp((.1 * spd), .25, 5);
-	if (spd == b_spd){
+	if (spd == 0){
 		spinning = false;
 	}
-	obj_camera.shake_scr(1,1);
 }
 
 if (knocked == true){
@@ -206,6 +225,8 @@ if (knocked == true){
 		} else {
 			//circ_minibounce();
 		}
+	} else if (room == rm_boss3 and obj_squarebg.tilt == true){
+				scr_rec_collision();	
 	}
 	if (bounce){
 		bnce(obj_barr);	
@@ -217,31 +238,40 @@ if (knocked == true){
 	}
 }
 
+if (floor(spd) <= 0){
+	knocked = false;
+	grabbed = false;
+	show_debug_message("Stopped Throw!");
+}
 if (grabbed == true){
-	x += lengthdir_x(hspd, mv_angle);
-	y += lengthdir_y(vspd, mv_angle);
-	realspd = spd;
-	scr_collision();
-	if (room == rm_boss2){
-		scr_circ_collision();
+
+	show_debug_message("I have been Thrown!");
+	if (gmove == true){
+		x += lengthdir_x(hspd, mv_angle);
+		y += lengthdir_y(vspd, mv_angle);
+		realspd = spd;
+		scr_collision();
+		if (room == rm_boss2){
+			scr_circ_collision();
+			if (bounce){
+				circ_bounce();	
+			} else {
+				circ_minibounce();
+			}
+		} else if (room == rm_boss3 and obj_squarebg.tilt == true){
+				scr_rec_collision();	
+		}
 		if (bounce){
-			circ_bounce();	
+			bnce(obj_barr);	
 		} else {
-			//circ_minibounce();
+			minibounce(obj_barr);
 		}
 	}
-	if (bounce){
-		bnce(obj_barr);	
-	} else {
-		//minibounce(obj_barr);
-	}
-	if (floor(spd) <= 0){
-		knocked = false;
-	}
+
 }
 
 // Combat
-if (global.can_abil == true){
+if (array_contains(global.active_sigils, 1)){ // Ball throw
 	if (mouse_check_button_pressed(mb_left) and cd == false and atkout == false and charging = true){
 		if (bon_spd > 0){
 			if (bon_spd == 17) {
@@ -255,7 +285,7 @@ if (global.can_abil == true){
 		
 		}
 		var _att = instance_create_layer(x + lengthdir_x(64, mv_angle), y + lengthdir_y(64, mv_angle), "Instances", obj_shield);
-		_att.toss(mv_angle, spd);
+		_att.toss(mv_angle, spd/4);
 		_att.bounce = bounce;
 		_att.deccel = clamp(deccel * .333, .05, deccel);
 		_att.dmg = spd/4;
@@ -263,6 +293,7 @@ if (global.can_abil == true){
 		spd = b_spd;
 		tut_q = true;
 	}
+}
 	//if (keyboard_check_pressed(ord("W")) and cd == false){
 	//	if (atkout == true){
 	//		if (object_exists(obj_shield)){
@@ -299,7 +330,6 @@ if (global.can_abil == true){
 	//		cd = true;
 	//	} 
 	//}
-}
 if (spinning == true and mouse_check_button(mb_left) and cd == false and atkout == false and global.can_attack == true){
 	var _att = instance_create_layer(x, y, "Instances", obj_swipe);
 	_att.image_angle = point_direction(x,y,mouse_x, mouse_y) - 90;

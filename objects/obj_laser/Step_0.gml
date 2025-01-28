@@ -5,6 +5,7 @@ if instance_place(x,y,obj_player) and (alarm[1] <= 0){
 	with(obj_player){
 		if (immune == false) {
 			alarm[2] = 30;
+			alarm[1] = 60;
 			hp--;
 		} else {
 			if (charge_shield == true){
@@ -13,6 +14,8 @@ if instance_place(x,y,obj_player) and (alarm[1] <= 0){
 		}
 		
 	}
-	alarm[1] = 60;
+	with(obj_damage){
+		alarm[0] = 60;	
+	}
 }
 image_angle = obj_starmage.att_angle;

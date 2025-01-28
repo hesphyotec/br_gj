@@ -24,10 +24,29 @@ regress = function(){
 }
 
 bnce = function(_obj){
-	if (place_meeting(x-64, y, _obj) or place_meeting(x+64, y, _obj)){
+	if (place_meeting(x + lengthdir_x(spd, ang), y, _obj)){
 		xflip = -xflip;
 	}
-	if (place_meeting(x, y-64, _obj) or place_meeting(x, y+64, _obj)){
+	if (place_meeting(x, y  + lengthdir_y(spd, ang), _obj)){
+		yflip = -yflip;
+	}
+	
+}
+circ_bounce = function(){
+	var distx = x - 1110;
+	var disty = y - 1110;
+
+	var max_distance = 512;
+	var current_angle = point_direction(0,0,distx,disty);
+
+	var max_distx = lengthdir_x(max_distance,current_angle);
+	var max_disty = lengthdir_y(max_distance,current_angle);
+
+	if abs(distx) > abs(max_distx) {
+		xflip = -xflip;
+
+	}
+	if abs(disty) > abs(max_disty) {
 		yflip = -yflip;
 	}
 }

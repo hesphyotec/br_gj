@@ -44,8 +44,8 @@ if (tilt == true){
 	}
 	
 	with (obj_player){
-		x += lengthdir_x(other.gdis/256, other.gdir);
-		y += lengthdir_y(other.gdis/256, other.gdir);
+		x += lengthdir_x(other.gdis/64, other.gdir);
+		y += lengthdir_y(other.gdis/64, other.gdir);
 		scr_circ_collision();
 	}
 }

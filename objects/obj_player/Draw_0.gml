@@ -54,7 +54,34 @@ if (realspd >0) {
 		draw_sprite_ext(spr_trail, image_index,  x -(lengthdir_x(realspd * xflip, mv_angle) * i), y -(lengthdir_y(realspd * yflip, mv_angle) * i), 1, 1, 0, _in_col, 1 / i);
 	}
 }
-
+var ldir = round(point_direction(x,y, mouse_x, mouse_y)/90);
+if (floor(spd) == 0 and charging == false){
+	switch(ldir){
+		case(0):
+			image_index = clamp(image_index mod 8, 6, 8);
+			break;
+		case(1):
+			image_index = clamp(image_index mod 4, 2, 8);
+			break;
+		case(2):
+			image_index = clamp(image_index mod 6, 4, 8);
+			break;
+		case(3):
+			image_index = clamp(image_index mod 2, 0, 2);
+			break;
+		case(4):
+			image_index = clamp(image_index mod 8, 6, 8);
+			break;
+	}
+	
+} else {
+	image_index = clamp(image_index mod 15, 8, 15);
+	if (floor(spd) >0) {
+		for(var i = 1; i < 6; i++){
+			draw_sprite_ext(spr_trail, image_index,  x -(lengthdir_x(realspd * xflip, mv_angle) * i), y -(lengthdir_y(realspd * yflip, mv_angle) * i), 1, 1, 0, _in_col, 1 / i);
+		}
+	}
+}
 draw_self();
 //Draws Launch Arrow
 if charging{
@@ -69,14 +96,19 @@ if charging{
 } else {
 	draw_set_color(c_white)
 }
+
+if (mousetut){
+	draw_sprite(spr_mouse_tut,0,x - 96, y);	
+	draw_sprite(spr_mouse_tut,1,x + 96, y);	
+}
+if (spintut){
+	draw_sprite(spr_spintut,0,x, y);	
+}
 //Debug
 //draw_set_color(c_green)
 //draw_text(x,y-10,spd);
-//draw_text(x,y-20,bon_spd);
-//draw_text(x,y-30,tut_q);
-//draw_text(x,y-40,tut_w);
+//draw_text(x,y-20,grabbed);
+//raw_text(x,y-30,charging);
+//draw_text(x,y-40,knocked);
 //draw_text(x,y-50,tut_e);
-if (charge_shield){
-	draw_circle(x,y,44, true);
-}
 

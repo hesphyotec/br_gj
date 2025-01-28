@@ -1,5 +1,5 @@
 if (state == "charging"){
-	var _crad = alarm[0]/6;
+	var _crad = alarm[1]/6;
 	var _jig = 0;
 
 	for(var i = 0; i < 360; i+= 60){

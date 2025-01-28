@@ -30,8 +30,8 @@
   "properties": [],
   "solid": false,
   "spriteId": {
-    "name": "spr_boss2_bg_temp",
-    "path": "sprites/spr_boss2_bg_temp/spr_boss2_bg_temp.yy",
+    "name": "spr_boss2_circ",
+    "path": "sprites/spr_boss2_circ/spr_boss2_circ.yy",
   },
   "spriteMaskId": null,
   "visible": true,

@@ -3,11 +3,20 @@ var _jig = 0;
 var _mcolor = c_yellow;
 var _mcolor2 = c_white;
 image_speed = 1;
+sprite_index = spr_axemage;
+if (global.cs_active and state == "none"){
+	image_index = image_index mod 2;
+} else if (state == "none"){
+	image_index = clamp(image_index, 0, 19);
+} else {
+	image_index = clamp(image_index mod 26, 21, 26);
+}
 if (alarm[4] > 0){
 	_mcolor = c_red;
 	_mcolor2 = c_red;
 	_jig = random_range(-16,16);
-	image_speed = .25;
+	image_speed = 2;
+	sprite_index = spr_axemage_dmg;
 }
 
 if (state == "smiting"){

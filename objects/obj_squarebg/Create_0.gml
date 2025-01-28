@@ -1,0 +1,36 @@
+x = 1536;
+y = 1536;
+depth = 100;
+gpu_set_depth(100);
+bg_surf = surface_create(room_width, room_height);
+tilt = false;
+gdir = 0;
+gdis = 0;
+tdir1 = 0;
+tdir2 = 0;
+tdistx = 0;
+tdisty = 0;
+z = 0;
+rotmat = [	[cos(tdir1), -sin(tdir1)],
+			[sin(tdir1), cos(tdir1)]
+			];
+rxmat =		[[1, 0, 0],
+			 [0, cos(tdir1), -sin(tdir1)],
+			 [0, sin(tdir1), cos(tdir1)]]
+rymat =		[[cos(tdir2), 0, sin(tdir2)],
+			 [0, 1, 0],
+			 [-sin(tdir2),0, cos(tdir2)]]
+
+xmat = [-512, 512, 512, -512];
+ymat = [-512, -512, 512, 512];
+zmat = [0, 0, 0, 0];
+tmat = 0;
+tmat2 = 0;
+
+minx = x;
+miny = y;
+maxx = x;
+maxy = y;
+
+p_max_x = maxx - x;
+p_max_y = maxy - y;

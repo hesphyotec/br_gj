@@ -1,8 +1,9 @@
 if (state == "blast"){
-	if (collision_circle(x,y, 32, obj_player, false, true) and alarm[1] <= 0){
+	if (collision_circle(x,y, 32, obj_player, false, true) and alarm[0] <= 0){
 		with(obj_player){
 			if (immune == false) {
 				alarm[2] = 20;
+				alarm[1] = 60;
 				hp--;
 			} else {
 				if (charge_shield == true){
@@ -10,7 +11,9 @@ if (state == "blast"){
 				}
 			}
 		}
-		alarm[1] = 60;
+		with(obj_damage){
+			alarm[0] = 60;
+		}
 	}
 	
 }

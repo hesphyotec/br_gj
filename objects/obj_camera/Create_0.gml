@@ -11,9 +11,11 @@ show_debug_message(display_get_width())
 show_debug_message(camheight)
 show_debug_message(camwidth)
 camera_set_view_size(view_camera[0], (camwidth), (camheight));
-follow = noone
+follow = noone;
+follow2 = noone;
 if object_exists(obj_player){
 	follow = obj_player;
+	follow2 = obj_enemy;
 } else { follow = obj_game}
 x = follow.x;
 y = follow.y;
@@ -24,6 +26,8 @@ yto = y;
 // Shake stuff
 s_amnt = 0;
 shake_scr = function(_dur, _amnt){
-	alarm[0] = _dur;
+	if (alarm[0] <= 0){
+		alarm[0] = _dur;
+	}
 	s_amnt = _amnt;
 }

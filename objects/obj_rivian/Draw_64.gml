@@ -5,3 +5,5 @@ if (global.cs_active == false){
 	draw_sprite(spr_bosshp_outline,0,64,64);
 	draw_set_color(c_white)
 }
+draw_text(64,0,state);
+draw_text(64,100,substate);

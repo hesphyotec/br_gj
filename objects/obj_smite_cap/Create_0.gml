@@ -2,7 +2,7 @@ circ_off = 32;
 circ_ang_off = 0;
 hp_rot = 0;
 state = "charging";
-alarm[0] = 60;
+alarm[2] = 60;
 
 aura = instance_create_layer(x, y, "Lights", obj_lightsource);
 aura.color = c_red;

@@ -1,15 +1,8 @@
 aura.x = x;
-aura.y = y+64;
+aura.y = y;
 var _aurarad = 1 + .25* (spd/11);
 aura.x_rad = _aurarad;
 aura.y_rad = _aurarad;
-
-aura2.x = x;
-aura2.y = y;
-_aurarad = 2;
-aura2.x_rad = _aurarad;
-aura2.y_rad = _aurarad;
-
 if (state == "charging" and alarm[0] <= 0){ // sets charging alarm
 	xflip = 1;
 	yflip = 1;

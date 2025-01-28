@@ -27,6 +27,7 @@ p_rad = 512;
 p_spd = 0;
 p_mult = 0;
 attk = noone;
+indic = 0;
 
 
 bnce = function(_obj){

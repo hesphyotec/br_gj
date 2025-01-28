@@ -14,10 +14,7 @@
     "name": "Star Mage",
     "path": "folders/Objects/Enemies/Star Mage.yy",
   },
-  "parentObjectId": {
-    "name": "obj_damage",
-    "path": "objects/obj_damage/obj_damage.yy",
-  },
+  "parentObjectId": null,
   "persistent": false,
   "physicsAngularDamping": 0.1,
   "physicsDensity": 0.5,

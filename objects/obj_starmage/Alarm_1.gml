@@ -7,7 +7,7 @@ switch(mode){
 		dashes = 0;
 		break;
 	case(2):
-		instance_destroy(obj_starclone);
+		clone.destroy_self();
 		state = "none";	
 		substate = "none";
 		mode = -1;

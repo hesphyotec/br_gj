@@ -1,20 +1,18 @@
 switch(mode){
 	case(0):
-		if instance_place(x,y, obj_axemage){
-			obj_axemage.hp -= 1;	
+		if instance_place(x,y, obj_enemy){
+			obj_enemy.hp -= 1;	
 		}
 		spd = lerp(spd, 0, deccel)
 		var _x = lengthdir_x(spd * xflip, ang);
 		var _y = lengthdir_y(spd * yflip, ang);
 		x += _x;
 		y += _y;
-		if collision_rectangle(x-64, y-64, x+64,y +64,obj_barr, false, true){
-			if (bounce){
-				bnce(instance_nearest(x,y, obj_barr));	
-			} else regress();
+		if (room == rm_boss2){
+			circ_bounce();
 		}
-	
-		if floor(spd) == 0{
+		bnce(obj_barr);
+		if (floor(spd) == 0){
 			regress();
 		}
 		if returning == true{
@@ -29,9 +27,9 @@ switch(mode){
 		image_angle += 25;
 		break;
 	case(1):
-		if instance_place(x,y, obj_axemage){
-			obj_axemage.hp -= .1;	
-			obj_axemage.bnce(self);
+		if instance_place(x,y, obj_enemy){
+			obj_enemy.hp -= .1;	
+			obj_enemy.bnce(self);
 		}
 		sprite_index = spr_bigshield;
 		spd = lerp(spd, 0, .3)

@@ -1,6 +1,6 @@
 if (follow != noone){
-	xto = follow.x;
-	yto = follow.y;
+	xto = follow.x
+	yto = follow.y
 }
 
 x += (xto-x)/15;

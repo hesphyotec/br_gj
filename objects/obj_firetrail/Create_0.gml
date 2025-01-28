@@ -1,3 +1,3 @@
-alarm[0] = 60;
+alarm[1] = 60;
 moving = false;
 dir = 0;

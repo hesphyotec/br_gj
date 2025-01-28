@@ -11,6 +11,7 @@ d_tbox = spr_;
 d_font = fnt_main;
 d_finished = false;
 c_line = 0;
+talk_i = 0;
 
 waiting = false;
 waitcode = "";

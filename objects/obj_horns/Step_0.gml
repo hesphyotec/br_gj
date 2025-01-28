@@ -5,10 +5,11 @@ var _clinex1 = x + lengthdir_x(512, image_angle);
 var _clinex2 = x - lengthdir_x(512, image_angle);
 var _cliney1 = y + lengthdir_y(512, image_angle);
 var _cliney2 = y - lengthdir_y(512, image_angle);
-if collision_line(_clinex1, _cliney1, _clinex2, _cliney2, obj_player, true, true) and (alarm[1] <= 0){
+if collision_line(_clinex1, _cliney1, _clinex2, _cliney2, obj_player, true, true) and (alarm[0] <= 0){
 	with(obj_player){
 		if (immune == false) {
 			alarm[2] = 30;
+			alarm[1] = 60;
 			hp--;
 		} else {
 			if (charge_shield == true){
@@ -17,6 +18,8 @@ if collision_line(_clinex1, _cliney1, _clinex2, _cliney2, obj_player, true, true
 		}
 		
 	}
-	alarm[1] = 60;
+	with(obj_damage){
+		alarm[0] = 60;
+	}
 }
 image_angle = (image_angle + 1);

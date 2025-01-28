@@ -1,7 +1,7 @@
 //charge alarm
 switch(state){
 	case("charging"):
-		var _att = instance_create_layer(x,y,"Instances",obj_enemy_attack);
+		var _att = instance_create_layer(x,y,"Instances",obj_smage_attack);
 		_att.master = self;
 		spd = 20;
 		att_angle = point_direction(x,y,target.x, target.y);
@@ -11,7 +11,7 @@ switch(state){
 		dashes++;
 		break;
 	case("spin"):
-		var _att = instance_create_layer(x,y,"Instances",obj_enemy_attack);
+		var _att = instance_create_layer(x,y,"Instances",obj_smage_attack);
 		_att.master = self;
 		spd = 20;
 		att_angle = point_direction(x,y,target.x, target.y);
@@ -31,7 +31,7 @@ switch(state){
 					substate = "grab";
 					dashes++;
 				} else {
-					var _att = instance_create_layer(x,y,"Instances",obj_enemy_attack);
+					var _att = instance_create_layer(x,y,"Instances",obj_smage_attack);
 					_att.master = self;
 					spd = 20;
 					att_angle = point_direction(x,y,target.x, target.y);
@@ -52,7 +52,7 @@ switch(state){
 				dashes++;
 				break;
 			default:
-				var _att = instance_create_layer(x,y,"Instances",obj_enemy_attack);
+				var _att = instance_create_layer(x,y,"Instances",obj_smage_attack);
 				_att.master = self;
 				spd = 20;
 				att_angle = point_direction(x,y,target.x, target.y);

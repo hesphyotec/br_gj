@@ -17,7 +17,7 @@ mv_angle = point_direction(x,y, mouse_x, mouse_y);
 dft_angle = 0;
 drift = false;
 d_spd = 4;
-deccel = .1;
+deccel = .06;
 atkout = false;
 knocked = false;
 charge_shield = false;
@@ -40,6 +40,7 @@ st_ang = get_spin_dir();
 bounce = false;
 xflip = 1;
 yflip = 1;
+gmove = true;
 
 bnce = function(_obj){
 	if (place_meeting(x + lengthdir_x(hspd, mv_angle), y, _obj)){
@@ -50,7 +51,6 @@ bnce = function(_obj){
 		yflip = -yflip;
 		obj_camera.shake_scr(10,20 * (spd/33));
 	}
-	
 }
 
 // circle stuff
@@ -67,10 +67,16 @@ circ_bounce = function(){
 	if abs(distx) > abs(max_distx) {
 		xflip = -xflip;
 		obj_camera.shake_scr(10,20 * (spd/33));
+		if (grabbed){
+			grabbed = false;	
+		}
 	}
 	if abs(disty) > abs(max_disty) {
 		yflip = -yflip;
 		obj_camera.shake_scr(10,20 * (spd/33));
+		if (grabbed){
+			grabbed = false;	
+		}
 	}
 }
 
@@ -88,12 +94,14 @@ circ_minibounce = function(){
 		xflip = -xflip;
 		spinning = false;
 		knocked = true;
+		grabbed = false;
 		obj_camera.shake_scr(10,20 * (spd/33));
 	}
 	if abs(disty) > abs(max_disty) {
 		yflip = -yflip;
 		spinning = false;
 		knocked = true;
+		grabbed = false;
 		obj_camera.shake_scr(10,20 * (spd/33));
 	}
 }
@@ -119,10 +127,13 @@ inframes = function(_frames){
 }
 
 grabthrow = function(_dir){
+	gmove = true;
 	mv_angle = (_dir + 180) mod 360;
+	spinning = false;
 	grabbed = true;
 	spd = 30;
 	deccel = 0;
+	show_debug_message("Throw Received!");
 }
 	//var _difx = sign(_obj.x - x);
 	//var _dify = sign(_obj.y - y);
@@ -148,6 +159,8 @@ circ_ang_off = 0;
 hp_rot = 0;
 mega_charge = false;
 
+mousetut = true;
+spintut = true;
 
 aura = instance_create_layer(x, y, "Lights", obj_lightsource);
 aura.color = c_fuchsia;

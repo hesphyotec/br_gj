@@ -18,6 +18,10 @@ if(global.cs_active == false){
 	phase = 5 - ceil(hp/250);
 	if hp <= 0 {
 		obj_musiccontrol.fadesong(100);
+		if(global.level_unl == 0){
+			global.level_unl++;
+			global.user_data.update_value("level", global.level_unl);
+		}
 		obj_cutscener.start_cs("/ENDBOSS1");
 	}
 
