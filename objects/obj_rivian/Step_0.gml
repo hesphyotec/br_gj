@@ -8,12 +8,16 @@ spincharge = 3;
 
 if(global.cs_active == false){
 	// Death
-	hp = clamp(hp, 0, 1000);
-	if (hp <= 0 and phase == 3){
-		obj_musiccontrol.fadesong(100);
-		obj_cutscener.start_cs("/ENDBOSS1");
+	if (phase == 3){
+		hp = clamp(hp, 0, 2000);
+	} else {
+		hp = clamp(hp, 100, 2000);
 	}
-	if (hp < 100 and phase < 3 and state == "none"){
+	if (hp <= 0 and phase == 3 and state != "grind"){
+		obj_musiccontrol.fadesong(100);
+		obj_cutscener.start_cs("/RIVIANEND");
+	}
+	if (hp <= 100 and phase < 3 and state == "none"){
 		state = "grind";
 		substate = "none";
 		phase++;
@@ -48,7 +52,7 @@ if(global.cs_active == false){
 			var _atkchoice = irandom(4);
 			switch(_atkchoice){
 				case(0):
-					state = "skulls";
+					state = "megaskulls";
 					substate = "none";
 					break;
 				case(1):
@@ -104,7 +108,7 @@ if(global.cs_active == false){
 					substate = "none";
 					break;
 				case(1):
-					state = "megaskulls";
+					state = "skulls";
 					substate = "none";
 					break;
 				case(2):
@@ -125,17 +129,28 @@ if(global.cs_active == false){
 		
 	switch(state){
 		case("teleport"):
-			if (attcount >= attmax){
-				state = "none";
-				substate = "none";
-				break;
-			}
-			if (alarm[3] <= 0 and alarm[0] <= 0){
-				var _tpoint = [obj_player.x, obj_player.y];
-				var _tang = random(360);
-				x = _tpoint[0] + lengthdir_x(128, _tang);
-				y = _tpoint[1] + lengthdir_y(128, _tang);
-				alarm[0] = 30;
+			switch(substate){
+				case("none"):
+					if(alarm[3] <= 0){
+						substate = "teleport";
+					}
+					break;
+				case("teleport"):
+					if (attcount >= attmax){
+						state = "none";
+						substate = "none";
+						spd = 0;
+						break;
+					}
+					if (alarm[3] <= 0 and alarm[0] <= 0){
+						var _tpoint = [obj_player.x, obj_player.y];
+						var _tang = random(360);
+						x = clamp(_tpoint[0] + lengthdir_x(128, _tang), 1152, 1920);
+						y = clamp(_tpoint[1] + lengthdir_y(128, _tang), 1152, 1920);
+						alarm[0] = 30;
+					}
+					spd = lerp(spd, 128,.1);
+					break
 			}
 			break;
 		case("telespin"):
@@ -252,6 +267,7 @@ if(global.cs_active == false){
 				case("throw"):
 					x += lengthdir_x(4, point_direction(x,y, obj_player.x, obj_player.y));
 					y += lengthdir_y(4, point_direction(x,y, obj_player.x, obj_player.y));
+					scr_collision();
 					break;
 				
 			}
@@ -283,13 +299,14 @@ if(global.cs_active == false){
 					x += lengthdir_x(spd * xflip, att_angle);
 					y += lengthdir_y(spd * yflip, att_angle);
 					spd = lerp(spd, 0, .03);
-					//scr_collision();
-					//stopwall();
+					scr_collision();
+					stopwall();
 					aura2.x_rad = 3;
 					aura2.y_rad = 3;
 					if (instance_place(x,y, obj_player)){
 						substate = "grab_spin";
 						obj_player.spd = 0;
+						obj_player.bon_spd = 0;
 						obj_player.grabbed = true;
 						obj_player.gmove = false;
 						alarm[3] = 120;
@@ -307,6 +324,7 @@ if(global.cs_active == false){
 							x = obj_rivian.x + lengthdir_x(32, mv_angle);
 							y = obj_rivian.y + lengthdir_y(32, mv_angle);
 							obj_player.grabbed = true;
+							obj_player.bounce = 0;
 							obj_player.gmove = false;
 						}
 						hp+=.3;
@@ -320,10 +338,11 @@ if(global.cs_active == false){
 					break;
 				case("grab_follow"):
 					if (alarm[3] <= 0 and alarm[0] <= 0){
-						alarm[0] = 60;
+						alarm[0] = 30;
 						var _tpoint = [obj_player.x, obj_player.y];
-						x = _tpoint[0] + lengthdir_x(128, obj_player.mv_angle);
-						y = _tpoint[1] + lengthdir_y(128, obj_player.mv_angle);
+						x = clamp(_tpoint[0] + lengthdir_x(128, obj_player.mv_angle), 1152, 1920);
+						y = clamp(_tpoint[1] + lengthdir_y(128, obj_player.mv_angle), 1152, 1920);
+						
 					}
 					break;
 			}
@@ -335,14 +354,17 @@ if(global.cs_active == false){
 					att_angle = point_direction(x,y, obj_player.x, obj_player.y);
 					x += lengthdir_x(spd, att_angle);
 					y += lengthdir_y(spd, att_angle);
+					scr_collision();
 					if (instance_place(x,y, obj_player)){
 						substate = "towall";
 						obj_player.spd = 0;
+						obj_player.held = true;
 						obj_player.grabbed = true;
 						obj_player.gmove = false;
 					}
 					break;
 				case("towall"):
+					spd = 30;
 					x += lengthdir_x(spd, att_angle);
 					y += lengthdir_y(spd, att_angle);
 					scr_collision();
@@ -362,7 +384,7 @@ if(global.cs_active == false){
 				case("grind"):
 					if (alarm[3] > 0){
 						spd = lerp(spd, 100, .01);
-						hp = clamp(hp + (spd *.1), 100, 1000);
+						hp = clamp(hp + (spd *.1), 100, 2000);
 						var _checkx = lengthdir_x(spd, att_angle);
 						var _checky = lengthdir_y(spd, att_angle);
 						if instance_place(x + _checkx, y + _checky, obj_barr){
@@ -378,6 +400,7 @@ if(global.cs_active == false){
 						obj_player.y = y;
 					} else {
 						att_angle = point_direction(x,y, 1536, 1536);
+						obj_player.held = false;
 						spd = lerp(spd, 1, .1);
 						x += lengthdir_x(spd, att_angle);
 						y += lengthdir_y(spd, att_angle);
@@ -386,7 +409,10 @@ if(global.cs_active == false){
 							substate = "none";
 							aggression = 0;
 							if(phase == 3){
+								obj_cutscener.start_cs("/RIVIANMID2");
 								obj_player.hp = 5;	
+							} else if (phase == 2){
+								obj_cutscener.start_cs("/RIVIANMID1");
 							}
 						}
 					}
@@ -419,6 +445,8 @@ if(global.cs_active == false){
 				case("none"):
 					instance_create_layer(obj_player.x, obj_player.y, "Instances", obj_jump_marker);
 					substate = "inair";
+					x = 0;
+					y = 0;
 					break;
 				case("inair"):
 					break;
@@ -443,6 +471,7 @@ if(global.cs_active == false){
 					att_angle = point_direction(x,y, obj_player.x, obj_player.y);
 					x+= lengthdir_x(2, att_angle);
 					y+= lengthdir_y(2, att_angle);
+					scr_collision();
 					break;
 				case("spin"):
 					x+= lengthdir_x(spd * xflip, att_angle);
@@ -461,18 +490,24 @@ if(global.cs_active == false){
 		case("clone_teleport"):
 			switch(substate){
 				case("none"):
+					if(alarm[3] <= 0){
+						substate = "teleport";
+					}
+					break;
+				case("teleport"):
 					if (attcount >= attmax){
 						instance_destroy(obj_teleclone);
 						state = "none";
 						substate = "none";
+						spd = 0;
 						break;
 					}
 					if (alarm[3] <= 0 and alarm[0] <= 0){
 						instance_destroy(obj_teleclone);
 						var _tpoint = [obj_player.x, obj_player.y];
 						var _tang = random(360);
-						x = _tpoint[0] + lengthdir_x(128, _tang);
-						y = _tpoint[1] + lengthdir_y(128, _tang);
+						x = clamp(_tpoint[0] + lengthdir_x(128, _tang), 1152, 1920);
+						y = clamp(_tpoint[1] + lengthdir_y(128, _tang), 1152, 1920);
 						alarm[0] = 30;
 						_tang += 90;
 						instance_create_layer(_tpoint[0] + lengthdir_x(128,_tang), _tpoint[1] + lengthdir_y(128, _tang), "Instances", obj_teleclone);
@@ -481,6 +516,7 @@ if(global.cs_active == false){
 						_tang += 90;
 						instance_create_layer(_tpoint[0] + lengthdir_x(128,_tang), _tpoint[1] + lengthdir_y(128, _tang), "Instances", obj_teleclone);
 					}
+					spd = lerp(spd, 128,.1);
 					break;
 			}
 			break;
@@ -501,7 +537,7 @@ if(global.cs_active == false){
 							var _clone = instance_create_layer(2048, irandom_range(1024, 2048), "Instances", obj_r_clone);
 							_clone.dir = point_direction(_clone.x, _clone.y, obj_player.x, obj_player.y);
 						}
-						alarm[3] = 30; 
+						alarm[3] = 60; 
 					}
 					break;
 			}
@@ -598,6 +634,7 @@ if(global.cs_active == false){
 						obj_player.spd = 0;
 						obj_player.grabbed = true;
 						obj_player.gmove = false;
+						obj_player.held = true;
 						alarm[3] = 120;
 						break;
 					}
@@ -633,6 +670,7 @@ if(global.cs_active == false){
 					}
 					obj_player.spd = 0;
 					obj_player.grabbed = true;
+					obj_player.held = true;
 					obj_player.gmove = false;
 					obj_player.x = x;
 					obj_player.y = y;
@@ -652,12 +690,14 @@ if(global.cs_active == false){
 					obj_player.spd = 0;
 					obj_player.grabbed = true;
 					obj_player.gmove = false;
+					obj_player.held = true;
 					obj_player.x = x;
 					obj_player.y = y;
 					obj_camera.shake_scr(5,5);
 					break;
 				case("return"):
 					att_angle = point_direction(x,y, 1536, 1536);
+					obj_player.held = false;
 					spd = 30;
 					spd = lerp(spd, 1, .1);
 					x += lengthdir_x(spd, att_angle);
@@ -682,9 +722,10 @@ if(global.cs_active == false){
 					if (alarm[3] <= 0 and alarm[0] <= 0){
 						instance_destroy(obj_tmarker);
 						var _tang = random(360);
-						x = t_next[0] + lengthdir_x(128, _tang);
-						y = t_next[1] + lengthdir_y(128, _tang);
+						x = clamp(t_next[0] + lengthdir_x(128, _tang), 1152, 1920);
+						y = clamp(t_next[1] + lengthdir_y(128, _tang), 1152, 1920);
 						alarm[0] = 20;
+					spd = lerp(spd, 128,.1);
 					}
 			}
 			break;
@@ -706,6 +747,7 @@ if(global.cs_active == false){
 					if(floor(spd) == 0){
 						state = "none";
 						substate = "none";
+						instance_destroy(obj_spinner.aura);
 						instance_destroy(obj_spinner);
 					}
 					break;
@@ -777,8 +819,8 @@ if(global.cs_active == false){
 		default:
 			break;
 	}
-	if(instance_exists(obj_enemy_attack) and state != "spin" and substate != "spin"){
-				instance_destroy(obj_enemy_attack);
+	if(instance_exists(obj_rivian_attack) and state != "spin" and substate != "spin"){
+				instance_destroy(obj_rivian_attack);
 	}
 	if instance_place(x,y,obj_barr){
 		spd = 0;

@@ -1,4 +1,4 @@
-hp = 1000;
+hp = 2000;
 
 aggression = 0;
 spd = 0;
@@ -9,7 +9,7 @@ att_angle = 0;
 xflip = 1;
 yflip = 1;
 knocked = false;
-phase = 1;
+phase = 0;
 smites = 0;
 state = "none";
 substate = "none";
@@ -100,3 +100,11 @@ aura2.color_thick = 1;
 aura2.whiteness = 1;
 aura2.x_rad = 3;
 aura2.y_rad = 3;
+
+if (global.quickdiag > 1){
+	obj_cutscener.start_cs("/RIVIANINTROQUICK");
+} else {
+	obj_cutscener.start_cs("/RIVIANINTRO");
+	global.user_data.update_value("diags",2);
+}
+

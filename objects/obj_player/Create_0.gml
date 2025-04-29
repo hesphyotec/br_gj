@@ -1,7 +1,7 @@
 /// Initialization and fundamental variables
 // Declaration of speeds
 
-spd = 4;
+spd = 0;
 hspd = spd;
 vspd = spd;
 charging = false;
@@ -24,6 +24,7 @@ charge_shield = false;
 grabbed = false;
 image_speed = 1;
 realspd = 0;
+held = false;
 
 get_spin_dir = function(){
 	return point_direction(x,y, mouse_x, mouse_y);
@@ -159,8 +160,8 @@ circ_ang_off = 0;
 hp_rot = 0;
 mega_charge = false;
 
-mousetut = true;
-spintut = true;
+mousetut = false;
+spintut = false;
 
 aura = instance_create_layer(x, y, "Lights", obj_lightsource);
 aura.color = c_fuchsia;

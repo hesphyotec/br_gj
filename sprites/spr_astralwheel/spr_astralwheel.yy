@@ -36,8 +36,8 @@
   "nineSlice": null,
   "origin": 4,
   "parent": {
-    "name": "Temp",
-    "path": "folders/Sprites/Temp.yy",
+    "name": "Star Mage",
+    "path": "folders/Sprites/Star Mage.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {

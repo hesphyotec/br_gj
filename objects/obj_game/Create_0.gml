@@ -10,6 +10,7 @@ global.pause = false;
 global.sigils_unlocked = global.user_data[$"sigils"];
 global.active_sigils =[0];
 global.level_unl = global.user_data[$"level"];
+global.quickdiag = global.user_data[$"diags"];
 global.player_dead = false;
 
 respawn_charge = 0;

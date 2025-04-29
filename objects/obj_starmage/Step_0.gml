@@ -1,15 +1,15 @@
 
 aura2.x = x;
 aura2.y = y;
-var _aurarad = 2;
+var _aurarad = 2 + irandom_range(-.01, .01) + (1 * spd/50);
 aura2.x_rad = _aurarad;
 aura2.y_rad = _aurarad;
 noattack = false;
 
 if(global.cs_active == false){
 	// Death
-	hp = clamp(hp, 0, 2000);
-	phase = 5 - ceil(hp/500);
+	hp = clamp(hp, 0, 4000);
+	phase = 5 - ceil(hp/1000);
 	switch(phase){
 		case(1):
 			wheelrange = [0, 2];
@@ -30,13 +30,15 @@ if(global.cs_active == false){
 			global.level_unl++;
 			global.user_data.update_value("level", global.level_unl);
 		}
-		obj_cutscener.start_cs("/ENDBOSS1");
+		obj_cutscener.start_cs("/BOSS2END");
 	}
 
 	// Aggression
 	aggression += 1;
 	if(aggression > 500 and state == "none"){
 		wheel = false;
+		sprite_index = spr_sm_t_wind;
+		image_index = 0;
 		state = "wheel";	
 	}
 	if(aggression > 100 and state == "none"){
@@ -53,7 +55,9 @@ if(global.cs_active == false){
 				wheel = true;
 			}
 			if (mode != -1){
-				state = "signatk";	
+				state = "signatk";
+				image_index = 0;
+				t_anim = true;
 			}
 			break;
 				
@@ -72,15 +76,16 @@ if(global.cs_active == false){
 						case("charging"):
 							x += lengthdir_x(2, point_direction(x,y,obj_player.x, obj_player.y));
 							y += lengthdir_y(2, point_direction(x,y,obj_player.x, obj_player.y));
-							scr_circ_collision();
 							circ_stop();
+							scr_circ_collision();
 							spd++;
 							break;
 						case("spin"):
 							x += lengthdir_x(spd * xflip, att_angle);
 							y += lengthdir_y(spd * yflip, att_angle);
-							scr_circ_collision();
 							circ_stop();
+							scr_circ_collision();
+							
 							if(alarm[1] <= 0){
 								instance_create_layer(x,y,"Instances", obj_firetrail);
 								alarm[3] = 1;
@@ -109,7 +114,7 @@ if(global.cs_active == false){
 					switch(substate){
 						case("none"):
 							if(!instance_exists(obj_starclone)){
-								x = x - 256;
+								x = x - 128;
 								clone = instance_create_layer(x + 256,y,"Instances", obj_starclone);
 								alarm[1] = 600;
 							}
@@ -124,15 +129,17 @@ if(global.cs_active == false){
 						case("charging"):
 							x += lengthdir_x(2, point_direction(x,y,obj_player.x, obj_player.y));
 							y += lengthdir_y(2, point_direction(x,y,obj_player.x, obj_player.y));
-							scr_circ_collision();
 							circ_stop();
+							scr_circ_collision();
+							
 							spd++;
 							break;
 						case("spin"):
 							x += lengthdir_x(spd * xflip, att_angle);
 							y += lengthdir_y(spd * yflip, att_angle);
-							scr_circ_collision();
 							circ_stop();
+							scr_circ_collision();
+							
 							scr_circ_collision();
 							if (floor(spd) == 0 and dashes < max_dash and alarm[0] <= 0){
 								xflip = 1;
@@ -155,15 +162,24 @@ if(global.cs_active == false){
 						case("charging"):
 							x += lengthdir_x(2, point_direction(x,y,obj_player.x, obj_player.y));
 							y += lengthdir_y(2, point_direction(x,y,obj_player.x, obj_player.y));
-							scr_circ_collision();
 							circ_stop();
+							scr_circ_collision();
+							
+							if (dashes >= max_dash){
+								mode = -1;
+								aggression = 0;
+								dashes = 0;
+								state = "none";	
+								substate = "none";
+							}
 							spd++;
 							break;
 						case("grab"):
 							x += lengthdir_x(spd * xflip, att_angle);
 							y += lengthdir_y(spd * yflip, att_angle);
-							scr_circ_collision();
 							circ_stop();
+							scr_circ_collision();
+							
 							if (instance_place(x,y, obj_player)){
 								obj_player.grabthrow(att_angle);
 								show_debug_message("Thrown!");
@@ -189,8 +205,9 @@ if(global.cs_active == false){
 						if (alarm[0] <= 0){
 							x += lengthdir_x(spd * xflip, att_angle);
 							y += lengthdir_y(spd * yflip, att_angle);
-							scr_circ_collision();
 							circ_stop();
+							scr_circ_collision();
+							
 							if (floor(spd) == 0) {
 								xflip = 1;
 								yflip = 1;
@@ -219,17 +236,14 @@ if(global.cs_active == false){
 								aggression = 0;
 								dashes = 0;	
 							}
-							x += lengthdir_x(2, point_direction(x,y,obj_player.x, obj_player.y));
-							y += lengthdir_y(2, point_direction(x,y,obj_player.x, obj_player.y));
-							scr_circ_collision();
-							circ_stop();
 							spd++;
 							break;
 						case("leap"):
 							x += lengthdir_x(spd * xflip, att_angle);
 							y += lengthdir_y(spd * yflip, att_angle);
-							scr_circ_collision();
 							circ_stop();
+							scr_circ_collision();
+							
 							if point_in_circle(x,y,ltarx, ltary, 32){
 								substate = "pounce";	
 							}
@@ -241,6 +255,7 @@ if(global.cs_active == false){
 								_atk.dir = i;
 							}
 							alarm[0] = 60;
+							image_index = 0;
 							substate = "charging";
 							break;
 					}
@@ -273,17 +288,17 @@ if(global.cs_active == false){
 						case("charging"):
 							x += lengthdir_x(2, point_direction(x,y,obj_player.x, obj_player.y));
 							y += lengthdir_y(2, point_direction(x,y,obj_player.x, obj_player.y));
-							scr_circ_collision();
 							circ_stop();
 							tilt_stop();
+							scr_circ_collision();
 							spd++;
 							break;
 						case("spin"):
 							x += lengthdir_x(spd * xflip, att_angle);
 							y += lengthdir_y(spd * yflip, att_angle);
-							scr_circ_collision();
 							circ_stop();
 							tilt_stop();
+							scr_circ_collision();
 							if (floor(spd) == 0 and dashes < max_dash and alarm[0] <= 0){
 								xflip = 1;
 								yflip = 1;
@@ -302,22 +317,14 @@ if(global.cs_active == false){
 				case(7): // Scorpio Sting
 					switch(substate){
 						case("none"):
-							alarm[3] = 60;
-							max_dash = 8;
-							dashes = 0;
+							alarm[1] = 300;
 							substate = "sting";
+							attk = instance_create_layer(x,y,"Instances", obj_stinger);
 							break;
 						case("sting"):
-							if(alarm[3] <= 0 and dashes < max_dash){
-								instance_create_layer(x,y,"Instances", obj_stinger);
-								dashes++;
-								alarm[3] = 60;
-							} else if (dashes >= max_dash){
-								state = "none";	
-								substate = "none";
-								mode = -1;
-								aggression = 0;
-								dashes = 0;
+							att_angle = point_direction(x,y,obj_player.x, obj_player.y)
+							if(attk.image_index < 2){
+								attk.image_angle = att_angle;
 							}
 							break;
 					}
@@ -336,7 +343,7 @@ if(global.cs_active == false){
 									var _atk = instance_create_layer(x,y, "Instances", obj_arrow);
 									_atk.tar = att_angle + random_range(-10, 0) + (90 * i);
 								}
-								alarm[3] = 5;
+								alarm[3] = 1;
 							}
 							break;
 					}
@@ -409,8 +416,8 @@ if(global.cs_active == false){
 			if (alarm[0] > 0) { // plays spinning animation
 				x += lengthdir_x(2, point_direction(x,y,obj_player.x, obj_player.y));
 				y += lengthdir_y(2, point_direction(x,y,obj_player.x, obj_player.y));
-				scr_circ_collision();
 				circ_stop();
+				scr_circ_collision();
 				spd++;
 			}
 			break;
@@ -418,8 +425,8 @@ if(global.cs_active == false){
 		case("spin"):
 			x += lengthdir_x(spd * xflip, att_angle);
 			y += lengthdir_y(spd * yflip, att_angle);
-			scr_circ_collision();
 			circ_stop();
+			scr_circ_collision();
 			if (floor(spd) == 0 and dashes < max_dash and alarm[0] <= 0){
 				xflip = 1;
 				yflip = 1;
@@ -433,8 +440,9 @@ if(global.cs_active == false){
 		if(alarm[2] <= 0){
 			x += lengthdir_x(spd * xflip, att_angle);
 			y += lengthdir_y(spd * yflip, att_angle);
-			scr_circ_collision();
 			circ_stop();
+			scr_circ_collision();
+			
 			spd = lerp(spd, 0, .2);
 			if (floor(spd) == 0){
 				alarm[2] = 180;

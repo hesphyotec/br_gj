@@ -15,7 +15,15 @@ switch(mode){
 		dashes = 0;
 		break;
 	case(10):
+		instance_destroy(obj_laser.aura);
 		instance_destroy(obj_laser);
+		state = "none";	
+		substate = "none";
+		mode = -1;
+		aggression = 0;
+		break;
+	case(7):
+		instance_destroy(attk);
 		state = "none";	
 		substate = "none";
 		mode = -1;

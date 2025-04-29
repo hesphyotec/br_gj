@@ -16,3 +16,9 @@ wallbounce = function(_obj){
 		obj_camera.shake_scr(10,20 * (spd/33));
 	}
 }
+aura = instance_create_layer(x, y, "Lights", obj_lightsource);
+aura.color = c_purple;
+aura.color_thick = .7;
+aura.whiteness = 1;
+aura.x_rad = 3;
+aura.y_rad = 3;

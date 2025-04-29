@@ -1,4 +1,4 @@
-hp = 1000;
+hp = 2000;
 
 aggression = 0;
 spd = 0;
@@ -72,4 +72,9 @@ aura2.whiteness = 1;
 aura2.x_rad = 3;
 aura2.y_rad = 3;
 
-obj_cutscener.start_cs("/INTRO");
+if (global.quickdiag > 0){
+	obj_cutscener.start_cs("/INTROQUICK");
+} else {
+	obj_cutscener.start_cs("/INTRO");
+	global.user_data.update_value("diags",1);
+}

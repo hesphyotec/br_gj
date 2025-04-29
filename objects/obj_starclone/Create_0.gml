@@ -52,7 +52,7 @@ circ_stop = function(){
 
 
 aura = instance_create_layer(x, y, "Lights", obj_lightsource);
-aura.color = c_blue;
+aura.color = c_red;
 aura.color_thick = .5;
 aura.whiteness = 1;
 aura.x_rad = 3;

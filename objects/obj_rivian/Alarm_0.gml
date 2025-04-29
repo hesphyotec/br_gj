@@ -28,7 +28,7 @@ switch(state){
 		var _tang = random(360);
 		x = _tpoint[0] + lengthdir_x(256, _tang);
 		y = _tpoint[1] + lengthdir_y(256, _tang);
-		var _att = instance_create_layer(x,y,"Instances",obj_enemy_attack);
+		var _att = instance_create_layer(x,y,"Instances",obj_rivian_attack);
 		_att.master = self;
 		spd = .1;
 		att_angle = point_direction(x,y,target.x, target.y);
@@ -68,7 +68,7 @@ switch(state){
 		}
 		break;
 	case("superspin"):
-		var _att = instance_create_layer(x,y,"Instances",obj_enemy_attack);
+		var _att = instance_create_layer(x,y,"Instances",obj_rivian_attack);
 		_att.master = self;
 		spd = 30;
 		att_angle = point_direction(x,y,target.x, target.y);
@@ -77,7 +77,7 @@ switch(state){
 		substate = "spin";
 		break;
 	case("supertilt"):
-		var _att = instance_create_layer(x,y,"Instances",obj_enemy_attack);
+		var _att = instance_create_layer(x,y,"Instances",obj_rivian_attack);
 		_att.master = self;
 		spd = 30;
 		att_angle = point_direction(x,y,target.x, target.y);
@@ -86,7 +86,7 @@ switch(state){
 		substate = "spin";
 		break;
 	case("ultraspin"):
-		var _att = instance_create_layer(x,y,"Instances",obj_enemy_attack);
+		var _att = instance_create_layer(x,y,"Instances",obj_rivian_attack);
 		_att.master = self;
 		_att = instance_create_layer(x,y, "Instances", obj_spinner);
 		_att.tar = random(360);
@@ -98,7 +98,7 @@ switch(state){
 		substate = "spin";
 		break;
 	default:
-		var _att = instance_create_layer(x,y,"Instances",obj_enemy_attack);
+		var _att = instance_create_layer(x,y,"Instances",obj_rivian_attack);
 		_att.master = self;
 		spd = 7;
 		att_angle = point_direction(x,y,target.x, target.y);

@@ -1,3 +1,9 @@
 alarm[1] = 60;
 moving = false;
 dir = 0;
+aura = instance_create_layer(x, y, "Lights", obj_lightsource);
+aura.color = c_orange;
+aura.color_thick = .7;
+aura.whiteness = 1;
+aura.x_rad = 1;
+aura.y_rad = 1;

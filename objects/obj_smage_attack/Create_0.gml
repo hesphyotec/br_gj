@@ -1,2 +1,2 @@
 damage_done = false;
-master = obj_axemage;
+master = obj_enemy;

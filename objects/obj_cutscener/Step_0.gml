@@ -4,9 +4,25 @@ if (global.cs_active == true){
 			get_next_line();
 		}
 	}
+	if (alarm[0] > 0){
+		a_fade = lerp(a_fade, 1, .1);	
+	}
 	if (waiting == true){
-		if (waitcode == code){
-			get_next_line();	
+		switch(waitcode){
+			case("fullcharge"):
+				if(fullcharge){
+					get_next_line();
+				}
+				break;
+			case("megaspin"):
+				if(megaspin){
+					get_next_line();
+				}
+				break;
+			default:
+				if (code == waitcode){
+					get_next_line();	
+				}
 		}
 	}
 }

@@ -1,5 +1,5 @@
 if(enabled){
-
+	draw_set_alpha(1);
 	var _rmx = display_get_gui_width()/2;
 	var _rmy = display_get_gui_height()/2;
 	if (room != rm_testmenu){
@@ -134,8 +134,8 @@ if(enabled){
 					draw_set_color(c_white);
 				}
 				draw_text(_rmx + 512, _rmy - 416, "The Master Witch");
-				draw_text(_rmx + 512, _rmy - 96 - 416, "Rivian Creciendo");
-				draw_sprite(spr_rivian,0, _rmx + 512, _rmy);
+				draw_text(_rmx + 512, _rmy - 96 - 416, "Rivian Crescendo");
+				draw_sprite(spr_rivian_idle,0, _rmx + 512, _rmy);
 			}
 	}
 }

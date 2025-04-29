@@ -14,7 +14,7 @@ spincharge = 3;
 
 if(global.cs_active == false){
 	// Death
-	hp = clamp(hp, 0, 1000);
+	hp = clamp(hp, 0, 2000);
 	phase = 5 - ceil(hp/250);
 	if hp <= 0 {
 		obj_musiccontrol.fadesong(100);

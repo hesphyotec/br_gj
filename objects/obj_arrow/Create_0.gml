@@ -1,3 +1,9 @@
 tar = point_direction(x,y, obj_player.x, obj_player.y);
 rad = point_distance(x,y, obj_circlebg.x, obj_circlebg.y);
 alarm[1] = 120;
+aura = instance_create_layer(x, y, "Lights", obj_lightsource);
+aura.color = c_teal;
+aura.color_thick = .7;
+aura.whiteness = 1;
+aura.x_rad = .75;
+aura.y_rad = .75;

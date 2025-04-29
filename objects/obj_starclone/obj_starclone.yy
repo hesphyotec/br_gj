@@ -37,8 +37,8 @@
   "properties": [],
   "solid": false,
   "spriteId": {
-    "name": "spr_starmage_fin",
-    "path": "sprites/spr_starmage_fin/spr_starmage_fin.yy",
+    "name": "spr_sm_t_clone",
+    "path": "sprites/spr_sm_t_clone/spr_sm_t_clone.yy",
   },
   "spriteMaskId": null,
   "visible": true,

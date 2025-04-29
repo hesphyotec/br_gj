@@ -3,9 +3,9 @@
   "resourceVersion": "1.0",
   "name": "spr_bosshp_outline",
   "bbox_bottom": 79,
-  "bbox_left": 6,
-  "bbox_right": 1241,
-  "bbox_top": 2,
+  "bbox_left": 1,
+  "bbox_right": 1250,
+  "bbox_top": 0,
   "bboxMode": 0,
   "collisionKind": 1,
   "collisionTolerance": 0,
@@ -13,14 +13,14 @@
   "edgeFiltering": false,
   "For3D": false,
   "frames": [
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"ac8c4bd6-fb1a-4652-b90e-d7c290ee3647",},
+    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"2e9c87cf-8321-4c68-a8b8-95047e619633",},
   ],
   "gridX": 0,
   "gridY": 0,
   "height": 80,
   "HTile": false,
   "layers": [
-    {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"e93f7973-7703-4d39-b1c7-bab0a9a14b4c","blendMode":0,"displayName":"default","isLocked":false,"opacity":100.0,"visible":true,},
+    {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"9187b05b-62ee-48c7-ba5a-0ff139424a2c","blendMode":0,"displayName":"default","isLocked":false,"opacity":100.0,"visible":true,},
   ],
   "nineSlice": null,
   "origin": 0,
@@ -54,7 +54,7 @@
     "timeUnits": 1,
     "tracks": [
       {"resourceType":"GMSpriteFramesTrack","resourceVersion":"1.0","name":"frames","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"1.0","Keyframes":[
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"ac8c4bd6-fb1a-4652-b90e-d7c290ee3647","path":"sprites/spr_bosshp_outline/spr_bosshp_outline.yy",},},},"Disabled":false,"id":"900f68ae-8c16-44f9-9296-20f079736221","IsCreationKey":false,"Key":0.0,"Length":1.0,"Stretch":false,},
+            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"2e9c87cf-8321-4c68-a8b8-95047e619633","path":"sprites/spr_bosshp_outline/spr_bosshp_outline.yy",},},},"Disabled":false,"id":"8bc392da-1d3f-40b2-b23f-59e3c213e633","IsCreationKey":false,"Key":0.0,"Length":1.0,"Stretch":false,},
           ],},"modifiers":[],"spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange": null,
@@ -70,5 +70,5 @@
   },
   "type": 0,
   "VTile": false,
-  "width": 1316,
+  "width": 1252,
 }

@@ -1,6 +1,7 @@
 if (instance_place(x,y,obj_swipe)){
 	obj_player.bnce(obj_enemy);
 	obj_player.inframes(30);
+	obj_surface_effect.effect_clash(c_fuchsia);
 	if (obj_player.mega_charge == true){
 		obj_enemy.minibounce(obj_player);
 	} else {

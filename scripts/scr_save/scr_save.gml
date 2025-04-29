@@ -9,7 +9,7 @@ function scr_save_json(_struct, _name){
 }
 
 function scr_load_json(_name){
-	var _buffer = buffer_load("save_data.json");
+	var _buffer = buffer_load("user_data.json");
 	if (_buffer != -1){
 		var _json_string = buffer_read(_buffer, buffer_string);
 		buffer_delete(_buffer);
@@ -21,6 +21,7 @@ function scr_load_json(_name){
 
 function user_data_struct() constructor {
 	level = 0;
+	diags = 0;
 	sigils = [0,1,2,3,4,5,6];
 	mastervol = 1;
 	musicvol = 1;
@@ -37,6 +38,6 @@ function user_data_struct() constructor {
 	
 	update_value = function(_name, _value) {
 		self[$ _name] = _value;
-		scr_save_json(self, "save_data.json");
+		scr_save_json(self, "user_data.json");
 	}
 }

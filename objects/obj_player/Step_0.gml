@@ -25,12 +25,20 @@ if (hp == 0){
 	audio_stop_all();
 	global.player_dead = true;
 	instance_create_layer(x,y,"Instances", obj_dead_player);
+	instance_deactivate_all(true);
+	instance_activate_object(obj_game);
+	instance_activate_object(obj_dead_player);
+	instance_activate_object(obj_musiccontrol);
+	instance_activate_object(obj_camera);
+	if (room == rm_boss2){
+		instance_activate_object(obj_circlebg);	
+	}
 	obj_game.alarm[0] = 120;
-	instance_destroy(obj_enemy);
-	instance_destroy(obj_swipe);
-	instance_destroy(obj_damage);
-	instance_destroy(obj_lightsource);
-	instance_deactivate_object(obj_surface_light);
+	//instance_destroy(obj_enemy);
+	//instance_destroy(obj_swipe);
+	//instance_destroy(obj_damage);
+	//instance_destroy(obj_lightsource);
+	//instance_deactivate_object(obj_surface_light);
 	obj_camera.follow = obj_dead_player;
 	instance_destroy(self);
 }
@@ -83,8 +91,6 @@ if (knocked == false and grabbed == false){
 				} else {
 					//circ_minibounce();
 				}
-			} else if (room == rm_boss3 and obj_squarebg.tilt == true){
-				scr_rec_collision();	
 			}
 			if (bounce){
 				bnce(obj_barr);	
@@ -102,6 +108,7 @@ if (knocked == false and grabbed == false){
 				bon_spd = clamp(bon_spd +.222, 0, 17);	
 			}
 			st_ang = get_spin_dir();
+			obj_cutscener.fullcharge = true;
 		} else {
 			var _angdif = sign(angle_difference(st_ang, get_spin_dir()));
 			if (_angdif == -1) {
@@ -113,7 +120,9 @@ if (knocked == false and grabbed == false){
 
 
 	if (bon_spd >= 17){
-		mega_charge = true;	
+		mega_charge = true;
+		obj_cutscener.megaspin = true;
+		global.can_release = true;
 		spintut = false;
 		obj_camera.shake_scr(10,5);
 	} else if (bon_spd > 0){
@@ -136,6 +145,7 @@ if (knocked == false and grabbed == false){
 			spinning = true;
 			charge_shield = false;
 			d_spd = b_spd;
+			deccel = .06;
 			if (bon_spd > 0){
 				if (bon_spd == 17) {
 					spd = 66;
@@ -152,6 +162,7 @@ if (knocked == false and grabbed == false){
 			} else {
 				audio_play_sound(asset_get_index("snd_launch"+string(irandom_range(1,3))), 5, false, global.effectvol);	
 			}
+			bon_spd = 0;
 			mega_charge = false;
 			mv_angle = get_spin_dir();
 			hspd = spd * xflip;
@@ -167,8 +178,6 @@ if (knocked == false and grabbed == false){
 				} else {
 					//circ_minibounce();
 				}
-			} else if (room == rm_boss3 and obj_squarebg.tilt == true){
-				scr_rec_collision();	
 			}
 			if (bounce){
 				bnce(obj_barr);	
@@ -178,6 +187,17 @@ if (knocked == false and grabbed == false){
 		
 			//obj_camera.shake_scr(30,25);
 			image_speed = clamp((.1 * spd), .25, 5);
+		}
+	} else {
+		if (mouse_check_button_released(mb_right) and charging == true){
+			audio_stop_sound(snd_charge);
+			charging = false;
+			audio_play_sound(asset_get_index("snd_launch"+string(irandom_range(1,3))), 5, false, global.effectvol);	
+			charge_shield = false;
+			mv_angle = get_spin_dir();
+			bon_spd = 0;
+			mega_charge = false;
+			spd = 0;
 		}
 	}
 }
@@ -195,8 +215,6 @@ if spinning == true and charging == false{
 		} else {
 			//circ_minibounce();
 		}
-	} else if (room == rm_boss3 and obj_squarebg.tilt == true){
-				scr_rec_collision();	
 	}
 	if (bounce){
 		bnce(obj_barr);	
@@ -225,8 +243,6 @@ if (knocked == true){
 		} else {
 			//circ_minibounce();
 		}
-	} else if (room == rm_boss3 and obj_squarebg.tilt == true){
-				scr_rec_collision();	
 	}
 	if (bounce){
 		bnce(obj_barr);	
@@ -258,8 +274,6 @@ if (grabbed == true){
 			} else {
 				circ_minibounce();
 			}
-		} else if (room == rm_boss3 and obj_squarebg.tilt == true){
-				scr_rec_collision();	
 		}
 		if (bounce){
 			bnce(obj_barr);	
@@ -330,13 +344,17 @@ if (array_contains(global.active_sigils, 1)){ // Ball throw
 	//		cd = true;
 	//	} 
 	//}
-if (spinning == true and mouse_check_button(mb_left) and cd == false and atkout == false and global.can_attack == true){
+if (spinning == true and mouse_check_button(mb_left) and cd == false and atkout == false and global.can_attack == true  and !instance_exists(obj_swipe)){
 	var _att = instance_create_layer(x, y, "Instances", obj_swipe);
 	_att.image_angle = point_direction(x,y,mouse_x, mouse_y) - 90;
 	_att.dmg = spd;
 	cd = true
 	audio_play_sound(asset_get_index("snd_sswing"+string(irandom_range(1,5))), 5, false, global.effectvol);
 	alarm[0] = 15;
+}
+
+if(mouse_check_button_released(mb_left) and instance_exists(obj_swipe)) or spinning = false{
+	instance_destroy(obj_swipe)
 }
 
 if (instance_place(x,y,obj_shield)){

@@ -30,8 +30,8 @@
   "properties": [],
   "solid": false,
   "spriteId": {
-    "name": "spr_boss_bg3",
-    "path": "sprites/spr_boss_bg3/spr_boss_bg3.yy",
+    "name": "spr_boss3_bg",
+    "path": "sprites/spr_boss3_bg/spr_boss3_bg.yy",
   },
   "spriteMaskId": null,
   "visible": true,

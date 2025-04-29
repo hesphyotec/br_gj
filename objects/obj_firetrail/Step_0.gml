@@ -1,5 +1,7 @@
 /// @description Insert description here
 // You can write your code in this editor
+aura.x = x;
+aura.y = y;
 if (instance_place(x, y, obj_player) and alarm[0] <= 0){
 	with(obj_player){
 		if (immune == false) {

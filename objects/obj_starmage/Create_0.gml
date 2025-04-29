@@ -1,4 +1,4 @@
-hp = 2000;
+hp = 4000;
 random_set_seed(get_timer());
 aggression = 0;
 spd = 0;
@@ -28,6 +28,7 @@ p_spd = 0;
 p_mult = 0;
 attk = noone;
 indic = 0;
+t_anim = false;
 
 
 bnce = function(_obj){
@@ -103,5 +104,5 @@ aura2.color_thick = .5;
 aura2.whiteness = 1;
 aura2.x_rad = 3;
 aura2.y_rad = 3;
-
+obj_cutscener.start_cs("/BOSS2INTRO");
 obj_musiccontrol.playsong(snd_boss2);

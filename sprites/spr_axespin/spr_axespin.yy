@@ -32,8 +32,8 @@
   "nineSlice": null,
   "origin": 4,
   "parent": {
-    "name": "Sprites",
-    "path": "folders/Sprites.yy",
+    "name": "Axe Mage",
+    "path": "folders/Sprites/Axe Mage.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {

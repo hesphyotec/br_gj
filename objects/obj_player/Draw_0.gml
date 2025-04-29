@@ -82,7 +82,10 @@ if (floor(spd) == 0 and charging == false){
 		}
 	}
 }
-draw_self();
+
+if (held == false){
+	draw_self();
+}
 //Draws Launch Arrow
 if charging{
 	draw_set_color(make_color_rgb(255, 255-(255 * spd/33), 255-(255 *spd/33)));

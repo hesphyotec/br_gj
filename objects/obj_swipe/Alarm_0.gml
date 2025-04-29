@@ -1,1 +1,1 @@
-instance_destroy(self);
+damage_done = false;

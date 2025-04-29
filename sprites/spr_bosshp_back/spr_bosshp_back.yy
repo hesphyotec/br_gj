@@ -2,10 +2,10 @@
   "resourceType": "GMSprite",
   "resourceVersion": "1.0",
   "name": "spr_bosshp_back",
-  "bbox_bottom": 69,
-  "bbox_left": 10,
-  "bbox_right": 1241,
-  "bbox_top": 12,
+  "bbox_bottom": 70,
+  "bbox_left": 9,
+  "bbox_right": 1242,
+  "bbox_top": 9,
   "bboxMode": 0,
   "collisionKind": 1,
   "collisionTolerance": 0,
@@ -13,14 +13,14 @@
   "edgeFiltering": false,
   "For3D": false,
   "frames": [
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"1089cdf2-c30c-41b5-a095-fdef80630153",},
+    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"8f986138-c45f-452e-80e3-8aa4ae614ee1",},
   ],
   "gridX": 0,
   "gridY": 0,
   "height": 80,
   "HTile": false,
   "layers": [
-    {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"1233f198-0e8b-44b1-beb3-156c35a640c7","blendMode":0,"displayName":"default","isLocked":false,"opacity":100.0,"visible":true,},
+    {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"d18b9b2e-107b-4316-8b7e-8d66c6d75947","blendMode":0,"displayName":"default","isLocked":false,"opacity":100.0,"visible":true,},
   ],
   "nineSlice": null,
   "origin": 0,
@@ -54,7 +54,7 @@
     "timeUnits": 1,
     "tracks": [
       {"resourceType":"GMSpriteFramesTrack","resourceVersion":"1.0","name":"frames","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"1.0","Keyframes":[
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"1089cdf2-c30c-41b5-a095-fdef80630153","path":"sprites/spr_bosshp_back/spr_bosshp_back.yy",},},},"Disabled":false,"id":"28b50d8c-940b-4b4d-9fee-c07adfa60487","IsCreationKey":false,"Key":0.0,"Length":1.0,"Stretch":false,},
+            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"8f986138-c45f-452e-80e3-8aa4ae614ee1","path":"sprites/spr_bosshp_back/spr_bosshp_back.yy",},},},"Disabled":false,"id":"33121980-165f-420d-9fd1-761a06931ca5","IsCreationKey":false,"Key":0.0,"Length":1.0,"Stretch":false,},
           ],},"modifiers":[],"spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange": null,
@@ -70,5 +70,5 @@
   },
   "type": 0,
   "VTile": false,
-  "width": 1316,
+  "width": 1252,
 }

@@ -1,6 +1,9 @@
 /// @description Insert description here
 // You can write your code in this editor
 event_inherited();
+var _aurarad = 5 + irandom_range(-1, 1);
+aura.x_rad = _aurarad;
+aura.y_rad = _aurarad;
 if instance_place(x,y,obj_player) and (alarm[1] <= 0){
 	with(obj_player){
 		if (immune == false) {

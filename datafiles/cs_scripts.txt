@@ -7,40 +7,141 @@ playanim|obj_enemy|walk
 playdiag|spr_enemy|spr_dbox|fnt_diag1|This shouldn't be happening!
 end
 /INTRO
-playdiag|spr_ada_diag|spr_dbox|fnt_diag1|Prepare yourself, then approach me when you are ready.
+playdiag|spr_ada_diag|spr_dbox|fnt_diag1|RIVIAN has returned.
+playdiag|spr_ada_diag|spr_dbox|fnt_diag1|She's slaughtered half of the high council already, and now the rest are too scared to do shit.
+playdiag|spr_ada_diag|spr_dbox|fnt_diag1|Hence why I've decided to free you.
+playdiag|spr_ada_diag|spr_dbox|fnt_diag1|I know you still have your SIGIL.
+playdiag|spr_yve_diag|spr_dbox|fnt_diag1|...
+skipif|fullcharge
+playdiag|spr_ada_diag|spr_dbox|fnt_diag1|Go on, use it and break those handcuffs.
+camera_focus|obj_player
+waitfor|fullcharge
+skipif|megaspin
+playdiag|spr_ada_diag|spr_dbox|fnt_diag1|You need more POWER... you must add MORE SPIN.
+camera_focus|obj_player
+waitfor|megaspin
+playdiag|spr_ada_diag|spr_dbox|fnt_diag1|Good. Now, prepare yourself.
+playdiag|spr_ada_diag|spr_dbox|fnt_diag1|I must gauge your aptitude. Approach me when you are ready.
 waitfor|intro_app
 playdiag|spr_ada_diag|spr_dbox|fnt_diag1|Ready? Let us begin.
+playsong|snd_boss1
 end
+
+/INTROQUICK
+playdiag|spr_ada_diag|spr_dbox|fnt_diag1|Good. Now, prepare yourself.
+playdiag|spr_ada_diag|spr_dbox|fnt_diag1|I must gauge your aptitude. Approach me when you are ready.
+camera_focus|obj_player
+waitfor|intro_app
+playdiag|spr_ada_diag|spr_dbox|fnt_diag1|Ready? Let us begin.
+playsong|snd_boss1
+end
+
 /ENDBOSS1
 playdiag|spr_ada_diag|spr_dbox|fnt_diag1|*Cough* Yes... yes...
-playdiag|spr_ada_diag|spr_dbox|fnt_diag1|You are quite strong... now... there is one more matter at hand...
-playdiag|spr_ada_diag|spr_dbox|fnt_diag1|Your final test... head to the bowels of the cathedral... and face the astral beast...
-playdiag|spr_ada_diag|spr_dbox|fnt_diag1|When you return, we shall prepare to face our foe...
-playdiag|spr_ada_diag|spr_dbox|fnt_diag1|Blessed be your journey, and may we reunite.
+playdiag|spr_ada_diag|spr_dbox|fnt_diag1|You are quite strong... now...
+playdiag|spr_ada_diag|spr_dbox|fnt_diag1|RIVIAN has corrupted the ASTRAL APOSTLE, RAGATHA.
+playdiag|spr_ada_diag|spr_dbox|fnt_diag1|You must handle her first, we stand no chance in a two versus two.
+playdiag|spr_ada_diag|spr_dbox|fnt_diag1|I will try to locate RIVIAN in the meantime.
+playdiag|spr_ada_diag|spr_dbox|fnt_diag1|Return here when RAGATHA has been handled.
+playdiag|spr_yve_diag|spr_dbox|fnt_diag1|...
+playdiag|spr_yve_diag|spr_dbox|fnt_diag1|Thank you ADA.
+playdiag|spr_ada_diag|spr_dbox|fnt_diag1|Indeed.
 levelend
 end
+
+/BOSS2INTRO
+playdiag|spr_yve_diag|spr_dbox|fnt_diag1|RAGATHA, huh?
+playdiag|spr_rag_diag|spr_dbox|fnt_diag1|The stars... the stars... the darkness has consumed... the stars...
+playdiag|spr_yve_diag|spr_dbox|fnt_diag1|She made you into her puppet, didn't she?
+playdiag|spr_yve_diag|spr_dbox|fnt_diag1|Don't worry, I'll make her pay.
+playdiag|spr_rag_diag|spr_dbox|fnt_diag1|THE BETRAYER... THE BETRAYER MUST DIE.
+playsong|snd_boss2
+end
+
+/BOSS2END
+playdiag|spr_rag_diag|spr_dbox|fnt_diag1|My mind... it feels clear again.
+playdiag|spr_yve_diag|spr_dbox|fnt_diag1|Feeling better?
+playdiag|spr_rag_diag|spr_dbox|fnt_diag1|YVETTE... thank you. You must hurry!
+playdiag|spr_rag_diag|spr_dbox|fnt_diag1|RIVIAN is much stronger than before!
+playdiag|spr_rag_diag|spr_dbox|fnt_diag1|Head to the east, before its too late!
+levelend
+end
+
 /TITLEINTRO
-playscreendiag|spr_ti1|fnt_diag1|For eons, man has sought to hold dominion over the primordial forces of the universe.
-playscreendiag|spr_ti1|fnt_diag1|Four hundred years ago, a coven of DARK WITCHES identified the SUPREME ENERGY, that which dwarfs all others.
-playscreendiag|spr_ti1|fnt_diag1|They called it: SPIN.
-playscreendiag|spr_ti1|fnt_diag1|The WITCHES created the SIGILS, powerful artifacts that translate SPIN into primal elements of the world.
-playscreendiag|spr_ti1|fnt_diag1|With their power, the WITCHES subjugated the world from behind a veil of darkness.
-playscreendiag|spr_ti1|fnt_diag1|That was until HOLY WARRIORS united against the WITCHES, who stole the SIGILS and freed the world from their grasp.
-playscreendiag|spr_ti1|fnt_diag1|Or so they thought.
-playscreendiag|spr_ti1|fnt_diag1|The MASTER WITCH RIVIAN hid among the shadows, slowly rebuilding her DARK COVEN from the ashes.
-playscreendiag|spr_ti1|fnt_diag1|That was until, one of her students revealed her to the HOLY UNION, and she was defeated by the HIGH PRIESTESS, ADA APOLLO.
-playscreendiag|spr_ti1|fnt_diag1|Her students were imprisoned by the HOLY UNION, never to see the light of freedom again.
-playscreendiag|spr_ti1|fnt_diag1|However, the MASTER WITCH has returned from the grave, slaughtering all in a unprejudiced crusade.
-playscreendiag|spr_ti1|fnt_diag1|In a last resort, the HOLY UNION has turned to YVETTE THE PENITANT, who had betrayed the MASTER WITCH and proved a possible ally.
-playscreendiag|spr_ti1|fnt_diag1|The fate of the world lies in your hands YVETTE. 
+playsong|snd_introcs
+playscreendiag|spr_|spr_dbox|fnt_diag1|For eons, man has sought to hold dominion over the primordial forces of the universe.
+playscreendiag|spr_|spr_dbox|fnt_diag1|Four hundred years ago, a coven of DARK WITCHES identified the SUPREME ENERGY, that which dwarfs all others.
+playscreendiag|spr_|spr_dbox|fnt_diag1|They called it: SPIN.
+playscreendiag|spr_intro_sigils|spr_dbox|fnt_diag1|The WITCHES created the SIGILS, powerful artifacts that translate SPIN into primal elements of the world.
+playscreendiag|spr_intro_sigils2|spr_dbox|fnt_diag1|With their power, the WITCHES subjugated the world from behind a veil of darkness.
+playscreendiag|spr_intro_holy_war|spr_dbox|fnt_diag1|That was until HOLY WARRIORS united against the WITCHES, who stole the SIGILS and freed the world from their grasp.
+playscreendiag|spr_intro_holy_war2|spr_dbox|fnt_diag1|Or so they thought.
+playscreendiag|spr_intro_current|spr_dbox|fnt_diag1|The MASTER WITCH RIVIAN hid among the shadows, slowly rebuilding her DARK COVEN from the ashes.
+playscreendiag|spr_intro_current2|spr_dbox|fnt_diag1|That was until, one of her students revealed her to the HOLY UNION, and she was defeated by the HIGH PRIESTESS, ADA APOLLO.
+playscreendiag|spr_intro_current3|spr_dbox|fnt_diag1|Her students were imprisoned by the HOLY UNION, never to see the light of freedom again.
+playscreendiag|spr_intro_current4|spr_dbox|fnt_diag1|However, the MASTER WITCH has returned from the grave, slaughtering all in a unprejudiced crusade.
+playscreendiag|spr_intro_current5|spr_dbox|fnt_diag1|In a last resort, the HOLY UNION has turned to YVETTE THE PENITANT, who had betrayed the MASTER WITCH and proved a possible ally.
+playscreendiag|spr_|spr_dbox|fnt_diag1|The fate of the world lies in your hands YVETTE.
+playscreendiag|spr_|spr_dbox|fnt_diag1|WARNING THIS GAME CONTAINS LOTS OF FLASHING LIGHTS AND COLORS.
+levelend
 end
 /RIVIANINTRO
-playdiag|spr_rivian|spr_dbox|fnt_diag1|Pathetic whore. This is the price you pay for defiling my magic with your filthy hands.
-playdiag|spr_rivian|spr_dbox|fnt_diag1|Ah, the betrayer.
-playdiag|spr_rivian|spr_dbox|fnt_diag1|Have you come to beg for my forgiveness? I'd be willing to let you serve under me once again, at a price of course.
-playdiag|spr_yvette|spr_dbox|fnt_diag1|I'm here to put an end to your torment.
-playdiag|spr_rivian|spr_dbox|fnt_diag1|Oh? You are no longer that gentle child I saved from the cold city streets.
-playdiag|spr_yvette|spr_dbox|fnt_diag1|We were just bodies to shield you while you cowered in the shadows.
-playdiag|spr_rivian|spr_dbox|fnt_diag1|I see. The time has come for the mother to discipline the daughter.
-playdiag|spr_rivian|spr_dbox|fnt_diag1|When you're crawling on the ground in a pile of your own mangled guts you will then understand what a mercy you just declined.
+playdiag|spr_riv_diag|spr_dbox|fnt_diag1|Ah, the BETRAYER.
+playdiag|spr_riv_diag|spr_dbox|fnt_diag1|I've already handled that eyesore of a priestess.
+playdiag|spr_riv_diag|spr_dbox|fnt_diag1|Have you come to beg for my forgiveness? I'd be willing to let you serve under me once again, at a price of course.
+playdiag|spr_yve_diag|spr_dbox|fnt_diag1|I'm here to put an end to your torment.
+playdiag|spr_riv_diag|spr_dbox|fnt_diag1|Oh? You are no longer that gentle child I saved from the cold city streets.
+playdiag|spr_yve_diag|spr_dbox|fnt_diag1|We were just bodies to shield you while you cowered in the shadows.
+playdiag|spr_riv_diag|spr_dbox|fnt_diag1|I see. The time has come for the mother to discipline the daughter.
+playdiag|spr_riv_diag|spr_dbox|fnt_diag1|When you're crawling on the ground in a pile of your own mangled guts you will then understand what a mercy you just declined.
+stopsong
+playsong|snd_boss3_1
+end
+
+/RIVIANINTROQUICK
+playdiag|spr_riv_diag|spr_dbox|fnt_diag1|When you're crawling on the ground in a pile of your own mangled guts you will then understand what a mercy you just declined.
+stopsong
+playsong|snd_boss3_1
+end
+
+/RIVIANMID1
+playdiag|spr_riv_diag|spr_dbox|fnt_diag1|Did you think it'd be that easy?
+end
+
+/RIVIANMID2
+stopsong
+playdiag|spr_riv_diag|spr_dbox|fnt_diag1|This is getting kind of boring, isn't it?
+playdiag|spr_yve_diag|spr_dbox|fnt_diag1|Such a coward.
+playdiag|spr_riv_diag|spr_dbox|fnt_diag1|Coward eh?
+playdiag|spr_riv_diag|spr_dbox|fnt_diag1|Heh, let's make this interesting.
+playdiag|spr_riv_diag|spr_dbox|fnt_diag1|This time I wont heal.
+playdiag|spr_riv_diag|spr_dbox|fnt_diag1|It's been so long since I've had a remotely fair fight.
+playdiag|spr_riv_diag|spr_dbox|fnt_diag1|Lets finish this.
+playsong|snd_boss3
+end
+
+/RIVIANEND
+playdiag|spr_riv_diag|spr_dbox|fnt_diag1|After four hundred years...
+playdiag|spr_riv_diag|spr_dbox|fnt_diag1|I... applaud you... my.. child...
+playdiag|spr_riv_diag|spr_dbox|fnt_diag1|You have earned... your freedom...
+playdiag|spr_riv_diag|spr_dbox|fnt_diag1|Show the world...
+playdiag|spr_riv_diag|spr_dbox|fnt_diag1|That SPIN...
+playdiag|spr_riv_diag|spr_dbox|fnt_diag1|Is SUPREME!
+levelend
+end
+
+/CREDITS
+playsong|snd_mainmenu
+playscreendiag|spr_|spr_dbox|fnt_diag1|Programming, Art, Design: Hesphyotec
+playscreendiag|spr_|spr_dbox|fnt_diag1|Music: Gigakoops
+playscreendiag|spr_|spr_dbox|fnt_diag1|Sound Effects Sourced via Pixabay and Freesound.
+playscreendiag|spr_|spr_dbox|fnt_diag1|If you've made it this far, thanks, it means a lot to me.
+playscreendiag|spr_|spr_dbox|fnt_diag1|I've had a lot of fun working in this gamejam, it's the first one I've ever done.
+playscreendiag|spr_|spr_dbox|fnt_diag1|I know it's a bit rough around the edges, a lot of stuff I did here I didn't know how to do before.
+playscreendiag|spr_|spr_dbox|fnt_diag1|To be honest before this I was struggling with adding mouse input.
+playscreendiag|spr_|spr_dbox|fnt_diag1|Currently I'm writing this at 2 AM before the submission.
+playscreendiag|spr_|spr_dbox|fnt_diag1|The game isn't nearly as good as I wanted it to be.
+playscreendiag|spr_|spr_dbox|fnt_diag1|I hope that you've enjoyed this game. Leave a comment and tell me what I can improve on!
+playscreendiag|spr_|spr_dbox|fnt_diag1|Thanks for playing.
+mainmenu
 end

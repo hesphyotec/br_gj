@@ -35,5 +35,6 @@ draw_circle_color((x), (y+64), 61 + _crad + _jig, c_black, _mcolor, true);
 draw_circle_color((x), (y+64), 60 + _crad + _jig, c_black, _mcolor, true);
 circ_ang_off = (circ_ang_off + (spd / 2) + spincharge) mod 360;
 
-
-draw_self();
+if(!instance_exists(obj_enemy_attack)){
+	draw_self();
+}

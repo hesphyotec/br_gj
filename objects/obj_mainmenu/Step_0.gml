@@ -93,6 +93,7 @@ if (enabled){
 					selection = 1;
 					if (mouse_check_button_pressed(mb_left)){
 						execute(selection, menu);
+						alarm[2] = 10;
 					}
 				} else if (mouse_y > room_height/2 + 384 and mouse_y < room_height/2 + 480){
 					selection = 2;
@@ -118,7 +119,7 @@ if (enabled){
 					}
 				} else if (device_mouse_y_to_gui(0) > display_get_gui_height()/2 + 256 and device_mouse_y_to_gui(0) < display_get_gui_height()/2 + 352){
 					selection = 2;
-					if (mouse_check_button(mb_left)){
+					if (mouse_check_button(mb_left) and alarm[2] <= 0){
 						effect_slide = clamp((device_mouse_x_to_gui(0) - (display_get_gui_width()/2) - 256) / (384), 0, 1);
 						execute(selection, menu);
 					}

@@ -13,7 +13,7 @@ if (state == "charging"){
 	draw_circle_color((x), (y), 63 + _crad + _jig, c_black, c_red, true);
 	draw_circle_color((x), (y), 61 + _crad + _jig, c_black, c_red, true);
 	draw_circle_color((x), (y), 60 + _crad + _jig, c_black, c_red, true);
-	circ_ang_off = (circ_ang_off + (alarm[0] / 2)) mod 360;
+	circ_ang_off = (circ_ang_off + (alarm[2] / 2)) mod 360;
 } else {
 	with(obj_surface_effect){
 		surface_set_target(effect_surf);

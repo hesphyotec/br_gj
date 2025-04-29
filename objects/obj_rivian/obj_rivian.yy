@@ -39,8 +39,8 @@
   "properties": [],
   "solid": false,
   "spriteId": {
-    "name": "spr_rivian",
-    "path": "sprites/spr_rivian/spr_rivian.yy",
+    "name": "spr_rivian_idle",
+    "path": "sprites/spr_rivian_idle/spr_rivian_idle.yy",
   },
   "spriteMaskId": null,
   "visible": true,

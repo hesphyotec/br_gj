@@ -3,7 +3,12 @@ if(keyboard_check_released(vk_f4)){
 	window_set_fullscreen(!window_get_fullscreen());
 }
 if keyboard_check_pressed(vk_escape){
-	if (room != rm_testmenu){
+	if (room == rm_intro_cs){
+		room_goto(rm_testmenu);
+	} else if (room != rm_testmenu){
+		if (global.player_dead){
+			room_goto(rm_testmenu);
+		}
 		if global.pause == false{
 			instance_deactivate_all(true);
 			instance_activate_object(obj_mainmenu);
